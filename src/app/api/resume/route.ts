@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { supabase } from '@/lib/supabase';
 import { cookies } from 'next/headers';
-
-const DATA_PATH = path.join(process.cwd(), 'src/data/resume-data.json');
 
 async function checkAuth() {
   const session = (await cookies()).get('admin_session');
@@ -11,14 +8,18 @@ async function checkAuth() {
 }
 
 export async function GET() {
-  if (!(await checkAuth())) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
   try {
-    const data = fs.readFileSync(DATA_PATH, 'utf8');
-    return NextResponse.json(JSON.parse(data));
+    const { data, error } = await supabase
+      .from('resumes')
+      .select('content')
+      .eq('id', 1)
+      .single();
+
+    if (error) throw error;
+    return NextResponse.json(data.content);
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to read data' }, { status: 500 });
+    console.error('Fetch error:', error);
+    return NextResponse.json({ error: 'Failed to read data from Supabase' }, { status: 500 });
   }
 }
 
@@ -26,6 +27,7 @@ export async function POST(request: Request) {
   if (!(await checkAuth())) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+
   try {
     const newData = await request.json();
     
@@ -35,9 +37,15 @@ export async function POST(request: Request) {
       lastUpdated: new Date().toISOString().replace('T', ' ').split('.')[0]
     };
 
-    fs.writeFileSync(DATA_PATH, JSON.stringify(newData, null, 2), 'utf8');
+    const { error } = await supabase
+      .from('resumes')
+      .update({ content: newData })
+      .eq('id', 1);
+
+    if (error) throw error;
     return NextResponse.json({ ok: true });
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to save data' }, { status: 500 });
+    console.error('Save error:', error);
+    return NextResponse.json({ error: 'Failed to save data to Supabase' }, { status: 500 });
   }
 }
