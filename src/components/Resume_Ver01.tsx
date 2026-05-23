@@ -160,7 +160,7 @@ export default function Resume() {
                         {sTr.label}
                       </div>
                       <div className="flex flex-wrap gap-1.5">
-                        {s.tags.map((tag, idx) => (
+                        {sTr.tags.map((tag, idx) => (
                           <span 
                             key={idx} 
                             className="bg-white/10 text-slate-100 text-[10px] px-2 py-0.5 rounded border border-white/10 font-medium"

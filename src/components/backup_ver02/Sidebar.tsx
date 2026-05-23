@@ -84,7 +84,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ data, lang }) => {
                     {sTr.label}
                   </h4>
                   <div className="flex flex-wrap gap-2.5">
-                    {s.tags.map((tag, tIdx) => (
+                    {sTr.tags.map((tag, tIdx) => (
                       <span key={tIdx} className="text-[15px] font-bold text-slate-900 bg-slate-50 px-3.5 py-1.5 rounded-lg border border-slate-200 shadow-sm transition-all hover:bg-slate-100">
                         {tag}
                       </span>
