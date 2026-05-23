@@ -21,7 +21,8 @@ export async function GET() {
         .eq('id', 1)
         .single();
 
-      if (!error && data) {
+      // Only use Supabase data if content is non-empty
+      if (!error && data && data.content && Object.keys(data.content).length > 0) {
         return NextResponse.json(data.content);
       }
       console.log('Supabase fetch failed or no data, falling back to local JSON');
@@ -61,18 +62,21 @@ export async function POST(request: Request) {
     if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
       const { error } = await supabase
         .from('resumes')
-        .update({ content: newData })
-        .eq('id', 1);
+        .upsert({ id: 1, content: newData, updated_at: new Date().toISOString() });
       supabaseError = error;
     }
 
-    // Always save to local JSON for development/backup
-    const filePath = path.join(process.cwd(), 'src/data/resume-data.json');
-    fs.writeFileSync(filePath, JSON.stringify(newData, null, 2), 'utf8');
+    // Try to save to local JSON (works in dev, may fail on Vercel - that's OK)
+    try {
+      const filePath = path.join(process.cwd(), 'src/data/resume-data.json');
+      fs.writeFileSync(filePath, JSON.stringify(newData, null, 2), 'utf8');
+    } catch (fsError) {
+      console.log('Local JSON write skipped (read-only filesystem):', fsError);
+    }
 
     if (supabaseError) {
-      console.error('Supabase save error (but local saved):', supabaseError);
-      // We return OK because local save was successful, making it usable in dev
+      console.error('Supabase save error:', supabaseError);
+      return NextResponse.json({ error: 'Failed to save to database' }, { status: 500 });
     }
 
     return NextResponse.json({ ok: true });

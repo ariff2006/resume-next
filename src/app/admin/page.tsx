@@ -418,7 +418,7 @@ export default function AdminPage() {
                       </div>
                       <div className="space-y-3">
                         <FieldLabel>Tags (Comma separated)</FieldLabel>
-                        <textarea rows={5} className="w-full text-[17px] border-2 border-slate-50 rounded-2xl p-6 focus:border-slate-900 outline-none transition-all text-slate-900 font-bold bg-slate-50/30 leading-relaxed" value={item.tags.join(', ')} onChange={(e) => { const newData = { ...data }; newData.skills[idx].tags = e.target.value.split(',').map(t => t.trim()).filter(t => t !== ''); setData(newData); }} />
+                        <textarea rows={5} className="w-full text-[17px] border-2 border-slate-50 rounded-2xl p-6 focus:border-slate-900 outline-none transition-all text-slate-900 font-bold bg-slate-50/30 leading-relaxed" value={item.translations[activeLang].tags.join(', ')} onChange={(e) => { const newData = { ...data }; newData.skills[idx].translations[activeLang].tags = e.target.value.split(',').map(t => t.trim()).filter(t => t !== ''); setData(newData); }} />
                       </div>
                     </div>
                   ))}
