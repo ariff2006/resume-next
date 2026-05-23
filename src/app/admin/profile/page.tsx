@@ -112,7 +112,7 @@ export default function ProfileAdmin() {
   if (!data) return <div>Error loading data</div>;
 
   // Helper to get image source
-  const getImageSrc = (path: string) => {
+  const getImageSrc = (path: string | undefined) => {
     if (!path) return 'https://ui-avatars.com/api/?name=User&size=200';
     if (path.startsWith('http')) return path;
     return `/${path}`;
