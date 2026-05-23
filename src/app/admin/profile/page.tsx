@@ -42,15 +42,23 @@ export default function ProfileAdmin() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-      const result = await res.json();
+      
+      let result;
+      try {
+        result = await res.json();
+      } catch (e) {
+        result = { error: 'Invalid JSON response from server' };
+      }
+
       if (res.ok) {
         setMessage({ text: 'บันทึกข้อมูลสำเร็จ', type: 'success' });
         setTimeout(() => setMessage(null), 3000);
       } else {
-        setMessage({ text: result.error || 'เกิดข้อผิดพลาดในการบันทึก', type: 'error' });
+        const errorMsg = result.error || `Error ${res.status}: บันทึกล้มเหลว`;
+        setMessage({ text: errorMsg, type: 'error' });
       }
     } catch (e) {
-      setMessage({ text: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้', type: 'error' });
+      setMessage({ text: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ (Network Error)', type: 'error' });
     }
     setSaving(false);
   };
