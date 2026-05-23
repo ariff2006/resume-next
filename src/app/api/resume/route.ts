@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { supabase, supabaseAdmin } from '@/lib/supabase';
 import { cookies } from 'next/headers';
 import fs from 'fs';
 import path from 'path';
@@ -15,6 +15,7 @@ export async function GET() {
   try {
     // Try Supabase if configured
     if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      // Use standard supabase for public GET
       const { data, error } = await supabase
         .from('resumes')
         .select('content')
@@ -59,8 +60,13 @@ export async function POST(request: Request) {
     let supabaseError = null;
 
     // Try Supabase if configured
-    if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-      const { error } = await supabase
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+      if (!supabaseAdmin) {
+        console.error('Supabase Admin client not initialized for resume update');
+        return NextResponse.json({ error: 'Database connection failed (Admin client null)' }, { status: 500 });
+      }
+      // Use supabaseAdmin for POST to ensure write permission (bypasses RLS)
+      const { error } = await supabaseAdmin
         .from('resumes')
         .upsert({ id: 1, content: newData, updated_at: new Date().toISOString() });
       supabaseError = error;
@@ -76,7 +82,7 @@ export async function POST(request: Request) {
 
     if (supabaseError) {
       console.error('Supabase save error:', supabaseError);
-      return NextResponse.json({ error: 'Failed to save to database' }, { status: 500 });
+      return NextResponse.json({ error: 'Failed to save to database: ' + supabaseError.message }, { status: 500 });
     }
 
     return NextResponse.json({ ok: true });

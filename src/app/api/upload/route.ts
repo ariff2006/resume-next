@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { supabaseAdmin } from '@/lib/supabase';
 import { cookies } from 'next/headers';
 
 export async function POST(request: Request) {
@@ -22,25 +22,36 @@ export async function POST(request: Request) {
     const ext = file.name.split('.').pop() || 'jpg';
     const fileName = `${type}/${Date.now()}-${Math.random().toString(36).substring(2, 7)}.${ext}`;
 
-    // Convert to ArrayBuffer → Uint8Array (works on Vercel serverless)
+    // Convert to Buffer for better compatibility with Supabase in Node.js/Vercel
     const arrayBuffer = await file.arrayBuffer();
-    const uint8Array = new Uint8Array(arrayBuffer);
+    const buffer = Buffer.from(arrayBuffer);
 
-    // Upload to Supabase Storage
-    const { data, error } = await supabase.storage
+    console.log(`Uploading file: ${fileName}, size: ${buffer.length} bytes`);
+
+    if (!supabaseAdmin) {
+      console.error('Supabase client failed to initialize. Check environment variables.');
+      return NextResponse.json({ error: 'Database connection failed (Supabase client is null)' }, { status: 500 });
+    }
+
+    // Upload to Supabase Storage using Admin client to bypass RLS
+    const { data, error } = await supabaseAdmin.storage
       .from('resume-assets')
-      .upload(fileName, uint8Array, {
+      .upload(fileName, buffer, {
         contentType: file.type || 'image/jpeg',
+        cacheControl: '3600',
         upsert: false,
       });
 
     if (error) {
-      console.error('Supabase storage error:', error.message);
-      return NextResponse.json({ error: 'Upload failed: ' + error.message }, { status: 500 });
+      console.error('Supabase storage error details:', error);
+      return NextResponse.json({ 
+        error: 'Upload failed: ' + error.message,
+        details: error
+      }, { status: 500 });
     }
 
     // Get public URL
-    const { data: urlData } = supabase.storage
+    const { data: urlData } = supabaseAdmin.storage
       .from('resume-assets')
       .getPublicUrl(data.path);
 

@@ -70,14 +70,23 @@ export default function ProfileAdmin() {
       });
       const result = await res.json();
       if (result.ok) {
-        const newData = { ...data! };
-        newData.personal.photo = result.path;
-        setData(newData);
+        setData(prev => {
+          if (!prev) return prev;
+          return {
+            ...prev,
+            personal: {
+              ...prev.personal,
+              photo: result.path
+            }
+          };
+        });
         setMessage({ text: 'อัปโหลดรูปภาพสำเร็จ!', type: 'success' });
         setTimeout(() => setMessage(null), 3000);
+      } else {
+        setMessage({ text: result.error || 'อัปโหลดล้มเหลว', type: 'error' });
       }
     } catch (error) {
-      setMessage({ text: 'อัปโหลดล้มเหลว', type: 'error' });
+      setMessage({ text: 'เกิดข้อผิดพลาดในการเชื่อมต่อ', type: 'error' });
     } finally {
       setUploading(false);
     }
@@ -101,6 +110,13 @@ export default function ProfileAdmin() {
   );
 
   if (!data) return <div>Error loading data</div>;
+
+  // Helper to get image source
+  const getImageSrc = (path: string) => {
+    if (!path) return 'https://ui-avatars.com/api/?name=User&size=200';
+    if (path.startsWith('http')) return path;
+    return `/${path}`;
+  };
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -156,7 +172,7 @@ export default function ProfileAdmin() {
             <div className="relative group">
               <div className="w-48 h-60 rounded-3xl overflow-hidden border-4 border-white shadow-xl bg-slate-100">
                 <img 
-                  src={data.personal.photo ? `/${data.personal.photo}` : 'https://ui-avatars.com/api/?name=User&size=200'} 
+                  src={getImageSrc(data.personal.photo)} 
                   alt="Profile" 
                   className="w-full h-full object-cover object-top"
                 />
