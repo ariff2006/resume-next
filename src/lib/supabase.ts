@@ -18,4 +18,4 @@ export const supabaseAdmin = (supabaseUrl && supabaseServiceKey)
         persistSession: false
       }
     })
-  : supabase;
+  : null; // Do not fallback to anon client to avoid RLS issues during admin tasks

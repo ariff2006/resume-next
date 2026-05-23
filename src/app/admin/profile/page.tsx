@@ -102,14 +102,29 @@ export default function ProfileAdmin() {
   };
 
   const updateField = (field: string, value: string, isTranslatable = false) => {
-    if (!data) return;
-    const newData = { ...data };
-    if (isTranslatable) {
-      (newData.personal.translations as any)[activeLang][field] = value;
-    } else {
-      (newData.personal as any)[field] = value;
-    }
-    setData(newData);
+    setData(prev => {
+      if (!prev) return prev;
+      
+      const newData = { ...prev };
+      if (isTranslatable) {
+        newData.personal = {
+          ...newData.personal,
+          translations: {
+            ...newData.personal.translations,
+            [activeLang]: {
+              ...(newData.personal.translations as any)[activeLang],
+              [field]: value
+            }
+          }
+        };
+      } else {
+        newData.personal = {
+          ...newData.personal,
+          [field]: value
+        };
+      }
+      return newData;
+    });
   };
 
   if (loading) return (
