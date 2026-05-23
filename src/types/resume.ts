@@ -71,10 +71,10 @@ export interface Education {
 
 export interface Skill {
   id: string;
-  tags: string[];
   translations: {
     [key: string]: {
       label: string;
+      tags: string[];
     };
   };
 }

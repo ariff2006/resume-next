@@ -4,6 +4,8 @@ import { cookies } from 'next/headers';
 import fs from 'fs';
 import path from 'path';
 
+export const dynamic = 'force-dynamic';
+
 async function checkAuth() {
   const session = (await cookies()).get('admin_session');
   return !!session;

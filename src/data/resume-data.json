@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastUpdated": "2026-05-23 01:03:56"
+    "lastUpdated": "2026-05-23 02:00:00"
   },
   "labels": {
     "th": {
@@ -25,7 +25,7 @@
       "summaryTitle": "关于我",
       "experienceTitle": "工作经验",
       "educationTitle": "教育背景",
-      "skillsTitle": "技能",
+      "skillsTitle": "专业技能",
       "certsTitle": "证书与培训",
       "keyResult": "关键成果",
       "footer": "© 2026 Patiwat Meekaeo — 使用 Next.js + Tailwind CSS 构建"
@@ -47,14 +47,14 @@
         "title": "IT Manager (Acting) | Infrastructure & Data Strategy",
         "location": "Bangkok, Thailand",
         "dob": "Born Jan 11, 1983 (Age 43)",
-        "summary": "I am currently serving as the IT Manager (Acting) at S.MEC Engineering, where I oversee end-to-end IT infrastructure and data management. On the systems and networking side, I manage full-scale Active Directory environments (Domain, OU, GPO, DNS, DHCP) and maintain corporate networks involving L2/L3 Switches, VLANs, STP, and Wi-Fi. My expertise also includes Firewall Policy configuration, Log monitoring, and managing cloud hosts on UIH, Inet, and Symphony platforms, alongside Microsoft 365 and Exchange administration.\n\nIn addition to infrastructure management, I leverage database and coding skills to drive organizational efficiency. I regularly use SQL for data management, from basic operations like UPDATE/DELETE to complex JOINs and aggregations with GROUP BY/COUNT. A key achievement of mine is developing customized budget reports for various projects, enabling executives to monitor expenses with precision and speed."
+        "summary": "Expert in IT Infrastructure management and data strategy with comprehensive experience in Systems, Networking, and Security. Currently serving as IT Manager (Acting) at S.MEC Engineering, responsible for the end-to-end design and foundation of organizational IT systems. Highly proficient in Active Directory management, high-speed networking (L2/L3, VLAN, Fiber Optic), and security management through Firewall (Fortigate), as well as overseeing ISO 9001:2015 standards for the IT department.\n\nBeyond systems administration, I excel in leveraging SQL database skills and Web Application development to drive organizational efficiency. This includes building real-time budget and cost analysis dashboards that reduce data complexity and provide precise support for executive decision-making. Proven track record in leading support teams to deliver services strictly according to established SLA and KPI standards."
       },
       "zh": {
         "name": "巴蒂瓦特 米格欧",
-        "title": "IT 经理(代理)| 基础设施与数据战略",
+        "title": "IT 经理(代理) | 基础设施与数据战略",
         "location": "泰国曼谷",
         "dob": "1983年1月11日生(43岁)",
-        "summary": "我目前担任 S.MEC Engineering 的代理 IT 经理，负责端到端的 IT 基础设施和数据管理。在系统和网络方面，我负责全方位的 Active Directory 管理（域名、组织单位、策略、DNS、DHCP），并维护包括 L2/L3 交换机、VLAN、STP 和 Wi-Fi 在内的公司网络。我的专业领域还包括防火墙策略配置、日志监控，以及 UIH、Inet 和 Symphony 平台上的云主机管理，同时负责 Microsoft 365 和 Exchange 的管理。\n\n除了基础设施管理，我还利用数据库和编程技能来提高组织效率。我经常使用 SQL 进行数据管理，从基础的 UPDATE/DELETE 操作到复杂的 JOIN 关联以及 GROUP BY/COUNT 数据聚合。我的主要成就是为各个项目开发了定制化的预算报告，使高管能够精确、快速地监控各项支出。"
+        "summary": "IT 基础设施 management 与数据战略专家，在系统、网络和安全方面拥有全面经验。目前担任 S.MEC Engineering 的代理 IT 经理，负责企业 IT 系统的端到端设计与基础构建。精通 Active Directory 管理、高速网络（L2/L3、VLAN、光纤）以及通过防火墙（Fortigate）进行安全管理，并负责 IT 部门的 ISO 9001:2015 标准监管。\n\n除系统管理外，我还擅长利用 SQL 数据库技能和 Web 应用程序开发来提升组织效率。这包括构建实时预算和成本分析仪表板，从而降低数据复杂性，并为高管决策提供精准支持。在领导支持团队、严格按照既定 SLA 和 KPI 标准交付服务方面拥有卓越的表现。"
       }
     },
     "photo": "photos/avatar_3ed860fb.jpg"
@@ -69,7 +69,7 @@
           "meta": "พ.ย. 2566 – ปัจจุบัน",
           "bullets": [
             "1. การวางแผนและบริหารจัดการแผนก IT",
-            "- วางแผนงบประมาณ IT ประจำปี (Capex & Opex) 01",
+            "- วางแผนงบประมาณ IT ประจำปี (Capex & Opex)",
             "- นำทีม IT Support ดูแลพนักงาน 160 คน",
             "- เจรจาต่อรองกับ Vendor เทียบราคาและสเปคเพื่อให้ได้ของที่คุ้มค่าที่สุด",
             "- ดูแลระบบ IT ให้ผ่านการประเมิน ISO 9001:2015 ทุกปี",
@@ -100,7 +100,7 @@
             "- มอบหมายงาน ติดตามความคืบหน้า และให้คำแนะนำทีมงาน",
             "- กำหนด SLA และ KPI ในการทำงานของทีม IT"
           ],
-          "highlight": "★ สรุปผลงานที่ S.MEC Engineering\n✓ ลดต้นทุน IT รวมกว่า 1.1 ล้านบาท/ปี\n✓ วาง Infrastructure สำนักงานใหญ่ใหม่จากศูนย์ รองรับพนักงาน 160 คน\n✓ พัฒนา Web App ใช้เองในองค์กรถึง 4 ระบบ\n✓ ย้ายระบบ ERP สำเร็จภายใน 1 เดือน\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🔹 ผลงานลดต้นทุน IT (ประหยัดไป 1,126,000 บาท/ปี)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n1. เปลี่ยนมาใช้ ZwCAD แทน AutoCAD (70 License) \n   ➤ ประหยัดไป ~770,000 บาท/ปี\n2. เปลี่ยนระบบ Virtualization จาก VMware เป็น Nutanix\n   ➤ ประหยัดค่า Server ไป ~132,000 บาท/ปี\n3. ย้าย Cloud Server ของระบบ HR (ได้สเปคดีขึ้น)\n   ➤ ประหยัดค่าบริการไป ~124,000 บาท/ปี\n4. ปรับแพ็กเกจ Microsoft 365 ใหม่ให้ตรงกับการใช้งานจริง (160 User)\n   ➤ ประหยัดไป ~100,000 บาท/ปี\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🔹 ผลงานวางระบบและพัฒนาแอป\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n5. วางระบบ IT สำนักงานใหญ่ใหม่ (ทำคนเดียวตั้งแต่ต้นจนจบ)\n   • ตั้ง Server AD คุมสิทธิ์พนักงาน 160 คน\n   • ติดตั้ง Fortigate 100F จัดการ Policy และ VPN\n   • ติดตั้ง Switch และ AP คลุมทั้งตึก\n   • จัดการให้เครื่องสแกนนิ้ว 19 ไซต์งานส่งข้อมูลเข้าส่วนกลางแบบ Real-time\n6. คุมโปรเจกต์ย้ายระบบ ERP Mango (จาก Sybase เป็น SQL Web)\n   ➤ จบโปรเจกต์ใน 2 เดือน ระบบนิ่ง 100% แก้ปัญหาเน็ตเวิร์กหน่วงที่เรื้อรังมานาน\n7. เขียน Web App ใช้งานเอง 3 ระบบ (ใช้ Google Apps Script + Google Sheets)\n   • ระบบแจ้งซ่อม IT (Help Desk)\n   • ระบบติดตามงานและงบประมาณ IT (Dashboard)\n   • ระบบรายงานค่าพิมพ์ (Print Cost)\n8. ติดตั้งระบบโทรศัพท์ IP Phone ภายในเอง ช่วยประหยัดค่าจ้าง Outsource"
+          "highlight": "★ สรุปผลงานที่ S.MEC Engineering\n✓ ลดต้นทุน IT รวมกว่า 1.1 ล้านบาท/ปี\n✓ วาง Infrastructure สำนักงานใหญ่ใหม่จากศูนย์ รองรับพนักงาน 160 คน\n✓ พัฒนา Web App ใช้เองในองค์กรถึง 4 ระบบ\n✓ ย้ายระบบ ERP สำเร็จภายใน 2 เดือน\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🔹 ผลงานลดต้นทุน IT (ประหยัดไป 1,126,000 บาท/ปี)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n1. เปลี่ยนมาใช้ ZwCAD แทน AutoCAD (70 License) \n   ➤ ประหยัดไป ~770,000 บาท/ปี\n2. เปลี่ยนระบบ Virtualization จาก VMware เป็น Nutanix\n   ➤ ประหยัดค่า Server ไป ~132,000 บาท/ปี\n3. ย้าย Cloud Server ของระบบ HR (ได้สเปคดีขึ้น)\n   ➤ ประหยัดค่าบริการไป ~124,000 บาท/ปี\n4. ปรับแพ็กเกจ Microsoft 365 ใหม่ให้ตรงกับการใช้งานจริง (160 User)\n   ➤ ประหยัดไป ~100,000 บาท/ปี\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🔹 ผลงานวางระบบและพัฒนาแอป\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n5. วางระบบ IT สำนักงานใหญ่ใหม่ (ทำคนเดียวตั้งแต่ต้นจนจบ)\n   • ตั้ง Server AD คุมสิทธิ์พนักงาน 160 คน\n   • ติดตั้ง Fortigate 100F จัดการ Policy และ VPN\n   • ติดตั้ง Switch และ AP คลุมทั้งตึก\n   • จัดการให้เครื่องสแกนนิ้ว 19 ไซต์งานส่งข้อมูลเข้าส่วนกลางแบบ Real-time\n6. คุมโปรเจกต์ย้ายระบบ ERP Mango (จาก Sybase เป็น SQL Web)\n   ➤ จบโปรเจกต์ใน 2 เดือน ระบบนิ่ง 100% แก้ปัญหาเน็ตเวิร์กหน่วงที่เรื้อรังมานาน\n7. เขียน Web App ใช้งานเอง 3 ระบบ (ใช้ Google Apps Script + Google Sheets)\n   • ระบบแจ้งซ่อม IT (Help Desk)\n   • ระบบติดตามงานและงบประมาณ IT (Dashboard)\n   • ระบบรายงานค่าพิมพ์ (Print Cost)\n8. ติดตั้งระบบโทรศัพท์ IP Phone ภายในเอง ช่วยประหยัดค่าจ้าง Outsource"
         },
         "en": {
           "title": "IT Manager (Acting)",
@@ -139,7 +139,7 @@
             "- Mentored team members and monitored task progress",
             "- Defined SLA and KPIs to elevate IT service quality"
           ],
-          "highlight": "★ 3-Year Summary at S.MEC Engineering\n✓ Reduced IT costs by over 1.1M THB/year through strategic optimization\n✓ Built new HQ IT Infrastructure from 0 to 100 for 160 users\n✓ Developed 4 in-house web applications to streamline operations\n✓ Successfully migrated ERP system within 1 month with 100% stability\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🔹 IT Cost Optimization — Total Savings: 1,126,000 THB/year\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n1. Switched AutoCAD to ZwCAD (70 Licenses)\n   ➤ Saved ~770,000 THB/year (81% reduction)\n2. Migrated Virtualization from VMware to Nutanix\n   ➤ Saved ~132,000 THB/year on server costs\n3. Optimized Cloud HR system hosting\n   ➤ Saved ~124,000 THB/year with better hardware specs\n4. Restructured Microsoft 365 license mix for 160 users\n   ➤ Saved ~100,000 THB/year\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🔹 Infrastructure & Development Highlights\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n5. HQ Infrastructure Overhaul: Single-handedly handled Design, Procurement, and Installation.\n6. ERP Mango Migration (Sybase to SQL Web): Project lead for 2-month migration. Resolved all previous bandwidth issues.\n7. Developed 3 Google Apps Script + Sheets apps: Help Desk, Project/Budget Dashboard, and Print Cost reports.\n8. Deployed internal IP Phone system (2 lines / 10 extensions) in-house, saving outsource fees."
+          "highlight": "★ 3-Year Summary at S.MEC Engineering\n✓ Reduced IT costs by over 1.1M THB/year through strategic optimization\n✓ Built new HQ IT Infrastructure from 0 to 100 for 160 users\n✓ Developed 4 in-house web applications to streamline operations\n✓ Successfully migrated ERP system within 2 months with 100% stability\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🔹 IT Cost Optimization — Total Savings: 1,126,000 THB/year\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n1. Switched AutoCAD to ZwCAD (70 Licenses)\n   ➤ Saved ~770,000 THB/year (81% reduction)\n2. Migrated Virtualization from VMware to Nutanix\n   ➤ Saved ~132,000 THB/year on server costs\n3. Optimized Cloud HR system hosting\n   ➤ Saved ~124,000 THB/year with better hardware specs\n4. Restructured Microsoft 365 license mix for 160 users\n   ➤ Saved ~100,000 THB/year\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🔹 Infrastructure & Development Highlights\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n5. HQ Infrastructure Overhaul: Single-handedly handled Design, Procurement, and Installation.\n6. ERP Mango Migration (Sybase to SQL Web): Project lead for 2-month migration. Resolved all previous bandwidth issues.\n7. Developed 3 Google Apps Script + Sheets apps: Help Desk, Project/Budget Dashboard, and Print Cost reports.\n8. Deployed internal IP Phone system (2 lines / 10 extensions) in-house, saving outsource fees."
         },
         "zh": {
           "title": "IT 经理(代理)",
@@ -154,7 +154,7 @@
             "2. 网络与基础设施 (Network & Infrastructure)",
             "- 从零开始搭建总部网络（包括 AD、VLAN、交换机和 8 个 Omada AP）",
             "- 部署 Zabbix 监控系统，实现网络和服务器的实时监控与日志分析",
-            "- 配置双 ISP 负载均衡互联网接入（实现 99% 正常运行时间）",
+            "- 配置 dual ISP 负载均衡互联网接入（实现 99% 正常运行时间）",
             "- 安装并配置 Fortigate 100F（防火墙策略、VPN、访问控制）",
             "3. 服务器与云端管理 (Server & Cloud)",
             "- 管理虚拟化环境（VMware, Proxmox, Hyper-V）",
@@ -178,7 +178,7 @@
             "- 分配任务、监控进度并指导团队成员",
             "- 制定 IT 服务的 SLA 和 KPI 考核标准"
           ],
-          "highlight": "★ S.MEC Engineering 3 年工作成果总结\n✓ 通过系统优化和战略管理，每年降低 IT 成本超过 110 万泰铢\n✓ 独自一人端到端完成总部 IT 基础设施搭建（支持 160 名用户）\n✓ 开发 4 个内部 Web 应用程序，大幅提升运营效率\n✓ 在 1 个月内成功完成 ERP 系统迁移，系统稳定性达 100%\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🔹 IT 成本优化成果 — 每年节省 1,126,000 泰铢\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n1. 将 AutoCAD 切换为 ZwCAD（70 个许可证）\n   ➤ 每年节省约 770,000 泰铢\n2. 将虚拟化平台从 VMware 迁移至 Nutanix\n   ➤ 每年节省服务器成本约 132,000 泰铢\n3. 迁移人力资源系统云服务器（升级规格并降本）\n   ➤ 每年节省服务费约 124,000 泰铢\n4. 优化 160 名用户的 Microsoft 365 许可证结构\n   ➤ 每年节省约 100,000 泰铢\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🔹 基础设施与开发亮点\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n5. 总部基础设施翻新：独自负责设计、采购及安装全过程。\n6. ERP Mango 迁移（Sybase 转 SQL Web）：作为项目负责人，2个月内完成迁移，彻底解决了带宽延迟问题。\n7. 基于 Google Apps Script 开发了 3 个应用：IT 报修系统、项目预算仪表板、打印成本报告。\n8. 内部自主安装 IP 电话系统（2 线/10 分机），节省了外包服务费。"
+          "highlight": "★ S.MEC Engineering 3 年工作成果总结\n✓ 通过系统优化和战略管理，每年降低 IT 成本超过 110 万泰铢\n✓ 独自一人端端到端完成总部 IT 基础设施搭建（支持 160 名用户）\n✓ 开发 4 个内部 Web 应用程序，大幅提升运营效率\n✓ 在 2 个月内成功完成 ERP 系统迁移，系统稳定性达 100%\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🔹 IT 成本优化成果 — 每年节省 1,126,000 泰铢\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n1. 将 AutoCAD 切换为 ZwCAD（70 个许可证）\n   ➤ 每年节省约 770,000 泰铢\n2. 将虚拟化平台从 VMware 迁移至 Nutanix\n   ➤ 每年节省服务器成本约 132,000 泰铢\n3. 迁移人力资源系统云服务器（升级规格并降本）\n   ➤ 每年节省服务费约 124,000 泰铢\n4. 优化 160 名用户的 Microsoft 365 许可证 structure\n   ➤ 每年节省约 100,000 泰铢\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🔹 基础设施与开发亮点\n━━━━━━━━━━━━━━━━━━━━━━━━━━━\n5. 总部基础设施翻新：独自负责设计、采购及安装全过程。\n6. ERP Mango 迁移（Sybase 转 SQL Web）：作为项目负责人，2个月内完成迁移，彻底解决了带宽延时问题。\n7. 基于 Google Apps Script 开发了 3 个应用：IT 报修系统、项目预算仪表板、打印成本报告。\n8. 内部自主安装 IP 电话系统（2 线/10 分机），节省了外包服务费。"
         }
       }
     },
@@ -243,7 +243,7 @@
           "bullets": [
             "1. IT 解决方案设计与规划",
             "- 分析客户需求，量身定制系统架构（网络、服务器、安全、云端）",
-            "- 绘制技术方案图并准备详细的报价单和提案",
+            "- 绘制技术方案图并准备详细的报价单与提案",
             "2. 售前技术支持",
             "- 配合销售团队向客户演示技术方案并进行详细讲解",
             "- 提供专业咨询，协助客户进行采购决策",
@@ -259,7 +259,7 @@
             "- 编写用户手册并对客户进行系统操作培训",
             "- 负责项目验收文档（UAT）及交付手续"
           ],
-          "highlight": "主要成就：\n• 为 10 多个企业客户设计并实施了网络基础设施项目（最大项目金额达 80 万泰铢）。\n• 确保了高可用网络和服务器环境的稳定运行。\n• 部署了站点到站点 VPN 方案，实现了安全的跨分支机构互联。\n• 通过提供高质量的技术方案图和售前咨询，显著提升了项目中标率。"
+          "highlight": "主要成就：\n• 为 10 多个企业客户设计并实施了网络基础设施项目（最大项目金额达 80 万泰铢）。\n• 确保了高可用网络 and 服务器环境的稳定运行。\n• 部署了站点到站点 VPN 方案，实现了安全的跨分支机构互联。\n• 通过提供高质量的技术方案图 and 售前咨询，显著提升了项目中标率。"
         }
       }
     },
@@ -288,7 +288,7 @@
             "- วางแผนงบซื้ออุปกรณ์, ค่าซ่อมบำรุง และค่า License รายปี",
             "- คุยกับ Vendor เทียบราคาเพื่อหาตัวเลือกที่คุ้มที่สุด"
           ],
-          "highlight": "โปรเจกต์สำคัญ: รับผิดชอบงานย้ายระบบ Server ของโรงพยาบาล (HIS) จาก On-Premise ขึ้น Cloud\n• วางแผนและคุมงานย้ายข้อมูล HIS ทั้งระบบขึ้น Cloud ได้อย่างราบรื่น\n• เทสต์ Backup & Restore ป้องกันข้อมูลหายระหว่างย้ายระบบ\n• จูนระบบ Cloud ให้ทำงานนิ่ง และเพิ่มความปลอดภัยตามมาตรฐานข้อมูลสุขภาพ\n• ช่วยลดค่าดูแล Server ประหยัดงบ และทำให้ขยายระบบในอนาคตได้ง่าย โปรเจกต์จบตรงเวลาและส่งมอบผ่าน UAT เรียบร้อย"
+          "highlight": "โปรเจกต์สำคัญ: รับผิดชอบงานย้ายระบบ Server ของโรงพยาบาล (HIS) จาก On-Premise ขึ้น Cloud\n• วางแผนและคุมงานย้ายข้อมูล HIS ทั้งระบบขึ้น Cloud ได้ได้อย่างราบรื่น\n• เทสต์ Backup & Restore ป้องกันข้อมูลหายระหว่างย้ายระบบ\n• จูนระบบ Cloud ให้ทำงานนิ่ง และเพิ่มความปลอดภัยตามมาตรฐานข้อมูลสุขภาพ\n• ช่วยลดค่าดูแล Server ประหยัดงบ และทำให้ขยายระบบในอนาคตได้ง่าย โปรเจกต์จบตรงเวลาและส่งมอบผ่าน UAT เรียบร้อย"
         },
         "en": {
           "title": "IT Support",
@@ -320,12 +320,12 @@
           "meta": "2020年5月 – 2021年10月",
           "bullets": [
             "1. 服务器与身份管理",
-            "- 通过 Active Directory 和组策略（GPO）管理用户及安全策略",
+            "- 通过 Active Directory 和组策略 (GPO) 管理用户及安全策略",
             "- 管理文件共享权限及文件夹安全性",
             "2. 云系统与安全管理",
             "- 监管 HIS-LIS SQL SYMPHONY 平台",
-            "- 管理基于云的端点安全系统（ESET Nod32）",
-            "- 管理 Google Workspace（企业邮箱及账号管理）",
+            "- 管理基于云的端点安全系统 (ESET Nod32)",
+            "- 管理 Google Workspace (企业邮箱及账号管理)",
             "3. IT 基础设施实施",
             "- 设计并安装 AD 服务器、交换机、指纹考勤、CCTV 和 NAS 备份系统",
             "- 部署 Zabbix 监控系统，实现内部网络和服务器的实时监控与日志分析",
@@ -389,7 +389,7 @@
           "meta": "2019年3月 – 2020年4月",
           "bullets": [
             "1. 服务器与 AD 维护",
-            "- 监控服务器健康状态并管理公司 Active Directory",
+            "- 监控服务器 health 状态并管理公司 Active Directory",
             "- 处理用户账号生命周期、组策略管理及数据访问权限",
             "2. 技术排障",
             "- 针对硬件、软件、网络及 ERP (Oracle) 问题提供专业的维修和排障服务",
@@ -435,9 +435,9 @@
           "org": "Ban Leong Chin Inter 有限公司",
           "meta": "2017年3月 – 2019年2月",
           "bullets": [
-            "管理服务器、Active Directory และ用户账户生命周期",
-            "排除硬件、软件、网络、电子邮件และ Oracle ERP 故障",
-            "管理数据备份และ灾难恢复"
+            "管理服务器、Active Directory 与用户账户生命周期",
+            "排除硬件、软件、网络、电子邮件与 Oracle ERP 故障",
+            "管理数据备份与灾难恢复"
           ],
           "highlight": ""
         }
@@ -489,148 +489,120 @@
   "skills": [
     {
       "id": "sk-1",
-      "tags": [
-        "Cisco",
-        "Switch L3",
-        "VLAN / STP",
-        "Zabbix Monitoring",
-        "TP-Link Omada",
-        "Mikrotik"
-      ],
       "translations": {
         "th": {
-          "label": "โครงสร้างพื้นฐานและเครือข่าย (Infrastructure & Networking)"
+          "label": "Infrastructure & Networking",
+          "tags": ["Cisco", "Switch L2/L3", "VLAN / STP", "Zabbix Monitoring", "TP-Link Omada", "Mikrotik"]
         },
         "en": {
-          "label": "Infrastructure & Networking"
+          "label": "Infrastructure & Networking",
+          "tags": ["Cisco", "Switch L2/L3", "VLAN / STP", "Zabbix Monitoring", "TP-Link Omada", "Mikrotik"]
         },
         "zh": {
-          "label": "基础设施与网络"
+          "label": "基础设施与网络",
+          "tags": ["思科 (Cisco)", "L2/L3 交换机", "虚拟局域网 (VLAN / STP)", "Zabbix 网络监控", "TP-Link Omada 无线方案", "Mikrotik 路由配置"]
         }
       }
     },
     {
       "id": "sk-2",
-      "tags": [
-        "Windows Server",
-        "Active Directory",
-        "Group Policy (GPO)",
-        "VMware",
-        "Hyper-V",
-        "Proxmox",
-        "Nutanix"
-      ],
       "translations": {
         "th": {
-          "label": "ระบบงานและวิชวลไลเซชัน (Systems & Virtualization)"
+          "label": "Systems & Virtualization",
+          "tags": ["Windows Server", "Active Directory", "Group Policy (GPO)", "VMware", "Hyper-V", "Proxmox", "Nutanix"]
         },
         "en": {
-          "label": "Systems & Virtualization"
+          "label": "Systems & Virtualization",
+          "tags": ["Windows Server", "Active Directory", "Group Policy (GPO)", "VMware", "Hyper-V", "Proxmox", "Nutanix"]
         },
         "zh": {
-          "label": "系统与虚拟化"
+          "label": "系统与虚拟化",
+          "tags": ["Windows Server 运维", "Active Directory 域控管理", "组策略 (GPO)", "VMware 虚拟化", "Hyper-V", "Proxmox", "Nutanix 超融合"]
         }
       }
     },
     {
       "id": "sk-3",
-      "tags": [
-        "Firewall Policy (Fortigate / Sophos / Zyxel)",
-        "VPN (Site-to-Site / Client)",
-        "MFA (Multi-Factor Auth)",
-        "IPS / IDS",
-        "ESET Endpoint Security",
-        "Web Filtering"
-      ],
       "translations": {
         "th": {
-          "label": "ความปลอดภัยทางไซเบอร์ (Cybersecurity & Protection)"
+          "label": "Cybersecurity & Protection",
+          "tags": ["Firewall Policy (Fortigate / Sophos / Zyxel)", "VPN (Site-to-Site / Client)", "MFA (Multi-Factor Auth)", "IPS / IDS", "ESET Endpoint Security", "Web Filtering"]
         },
         "en": {
-          "label": "Cybersecurity & Protection"
+          "label": "Cybersecurity & Protection",
+          "tags": ["Firewall Policy (Fortigate / Sophos / Zyxel)", "VPN (Site-to-Site / Client)", "MFA (Multi-Factor Auth)", "IPS / IDS", "ESET Endpoint Security", "Web Filtering"]
         },
         "zh": {
-          "label": "网络安全与防护"
+          "label": "网络安全与防护",
+          "tags": ["防火墙策略 (Fortigate / Sophos / Zyxel)", "VPN 隧道 (Site-to-Site / Client)", "多因子身份验证 (MFA)", "入侵检测与防御 (IPS / IDS)", "ESET 终端安全防护", "网页过滤与行为管理"]
         }
       }
     },
     {
       "id": "sk-7",
-      "tags": [
-        "SAN (Storage Area Network)",
-        "Synology NAS",
-        "Veeam Backup",
-        "Shadow Copy / Snapshot",
-        "Disaster Recovery (DR)"
-      ],
       "translations": {
         "th": {
-          "label": "การจัดเก็บและสำรองข้อมูล (Storage & Data Backup)"
+          "label": "Storage & Data Backup",
+          "tags": ["SAN (Storage Area Network)", "Synology NAS", "Veeam Backup", "Shadow Copy / Snapshot", "Disaster Recovery (DR)"]
         },
         "en": {
-          "label": "Storage & Data Backup"
+          "label": "Storage & Data Backup",
+          "tags": ["SAN (Storage Area Network)", "Synology NAS", "Veeam Backup", "Shadow Copy / Snapshot", "Disaster Recovery (DR)"]
         },
         "zh": {
-          "label": "存储与数据备份"
+          "label": "存储与数据备份",
+          "tags": ["存储区域网络 (SAN)", "群晖 (Synology NAS) 管理", "Veeam 备份方案", "快照与阴影复制 (Snapshot / Shadow Copy)", "容灾恢复 (Disaster Recovery)"]
         }
       }
     },
     {
       "id": "sk-4",
-      "tags": [
-        "Microsoft 365 (Admin)",
-        "Exchange Online / Teams",
-        "Google Workspace",
-        "ERP (Mango / Oracle)"
-      ],
       "translations": {
         "th": {
-          "label": "คลาวด์และโซลูชันองค์กร (Cloud & Enterprise Solutions)"
+          "label": "Cloud & Enterprise Solutions",
+          "tags": ["Microsoft 365 (Admin)", "Exchange Online / Teams", "Google Workspace", "ERP (Mango / Oracle)"]
         },
         "en": {
-          "label": "Cloud & Enterprise Solutions"
+          "label": "Cloud & Enterprise Solutions",
+          "tags": ["Microsoft 365 (Admin)", "Exchange Online / Teams", "Google Workspace", "ERP (Mango / Oracle)"]
         },
         "zh": {
-          "label": "云与企业解决方案"
+          "label": "云与企业解决方案",
+          "tags": ["Microsoft 365 企业管理", "Exchange Online / Teams 运维", "Google Workspace 管理", "ERP 系统运维 (Mango / Oracle)"]
         }
       }
     },
     {
       "id": "sk-6",
-      "tags": [
-        "SQL (Query / Join / Aggregation)",
-        "MS SQL Server / Sybase",
-        "Python",
-        "Google Apps Script",
-        "PHP / JavaScript / HTML5"
-      ],
       "translations": {
         "th": {
-          "label": "ฐานข้อมูลและการพัฒนา (Programming & Database)"
+          "label": "Programming & Database",
+          "tags": ["SQL (Query / Join / Aggregation)", "MS SQL Server / Sybase", "Python", "Google Apps Script", "PHP / JavaScript / HTML5"]
         },
         "en": {
-          "label": "Programming & Database"
+          "label": "Programming & Database",
+          "tags": ["SQL (Query / Join / Aggregation)", "MS SQL Server / Sybase", "Python", "Google Apps Script", "PHP / JavaScript / HTML5"]
         },
         "zh": {
-          "label": "编程与数据库"
+          "label": "编程与数据库",
+          "tags": ["SQL 数据库开发 (Query / Join)", "MS SQL Server / Sybase 维护", "Python 自动化脚本", "Google Apps Script 开发", "Web 开发 (PHP / JS / HTML5)"]
         }
       }
     },
     {
       "id": "sk-8",
-      "tags": [
-        "ไทย (Native)",
-        "อังกฤษ (Beginner)"
-      ],
       "translations": {
         "th": {
-          "label": "ภาษาที่สื่อสารได้ (Spoken Languages)"
+          "label": "Spoken Languages",
+          "tags": ["Thai (Native)", "English (Beginner)"]
         },
         "en": {
-          "label": "Spoken Languages"
+          "label": "Spoken Languages",
+          "tags": ["Thai (Native)", "English (Beginner)"]
         },
         "zh": {
-          "label": "语言能力"
+          "label": "语言能力",
+          "tags": ["泰语 (母语)", "英语 (基础)"]
         }
       }
     }
