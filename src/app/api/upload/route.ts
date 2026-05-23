@@ -11,30 +11,31 @@ export async function POST(request: Request) {
 
   try {
     const formData = await request.formData();
-    const file = formData.get('file') as File;
-    const type = formData.get('type') as string; // 'photos' or 'certs'
+    const file = formData.get('file') as File | null;
+    const type = (formData.get('type') as string) || 'photos';
 
     if (!file) {
       return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
     }
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
     // Create unique filename
-    const ext = file.name.split('.').pop();
+    const ext = file.name.split('.').pop() || 'jpg';
     const fileName = `${type}/${Date.now()}-${Math.random().toString(36).substring(2, 7)}.${ext}`;
+
+    // Convert to ArrayBuffer → Uint8Array (works on Vercel serverless)
+    const arrayBuffer = await file.arrayBuffer();
+    const uint8Array = new Uint8Array(arrayBuffer);
 
     // Upload to Supabase Storage
     const { data, error } = await supabase.storage
       .from('resume-assets')
-      .upload(fileName, buffer, {
-        contentType: file.type,
+      .upload(fileName, uint8Array, {
+        contentType: file.type || 'image/jpeg',
         upsert: false,
       });
 
     if (error) {
-      console.error('Supabase storage error:', error);
+      console.error('Supabase storage error:', error.message);
       return NextResponse.json({ error: 'Upload failed: ' + error.message }, { status: 500 });
     }
 
@@ -47,8 +48,8 @@ export async function POST(request: Request) {
       ok: true,
       path: urlData.publicUrl,
     });
-  } catch (error) {
-    console.error('Upload error:', error);
-    return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
+  } catch (err: any) {
+    console.error('Upload error:', err?.message || String(err));
+    return NextResponse.json({ error: 'Upload failed: ' + (err?.message || 'Unknown error') }, { status: 500 });
   }
 }
