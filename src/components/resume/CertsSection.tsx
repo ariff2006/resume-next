@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, ExternalLink } from 'lucide-react';
+import { Award, ExternalLink, ShieldCheck } from 'lucide-react';
 import { ResumeData } from '@/types/resume';
 
 interface CertsSectionProps {
@@ -11,32 +11,35 @@ export const CertsSection: React.FC<CertsSectionProps> = ({ data, lang }) => {
   const labels = data.labels[lang] || data.labels.th;
 
   return (
-    <section className="space-y-6">
-      <div className="flex items-center gap-3 mb-8 border-b-2 border-slate-900 pb-2">
-        <Award className="w-5 h-5 text-slate-900" />
-        <h2 className="text-[16px] font-bold text-slate-900 uppercase tracking-widest">
+    <section className="space-y-12">
+      {/* SECTION HEADER */}
+      <div className="flex items-center gap-4 mb-10 border-b-4 border-slate-900 pb-3">
+        <Award className="w-8 h-8 text-slate-900" />
+        <h2 className="text-[22px] font-black text-slate-900 uppercase tracking-widest">
           {labels.certsTitle}
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {data.certs.map((c) => {
           const cTr = c.translations[lang] || c.translations.th;
           return (
             <div 
               key={c.id} 
-              className={`flex items-start gap-4 p-4 rounded border border-slate-200 bg-white transition-all hover:bg-slate-50 ${c.file ? 'cursor-pointer hover:border-slate-400' : ''}`}
+              className={`group flex items-start gap-4 p-6 rounded-xl border border-slate-100 bg-white transition-all duration-300 hover:border-blue-200 hover:shadow-md ${c.file ? 'cursor-pointer' : ''}`}
               onClick={() => c.file && window.open(`/${c.file}`, '_blank')}
             >
-              <Award className="w-5 h-5 text-slate-400 mt-0.5 flex-shrink-0" />
+              <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
               
               <div className="flex-1 min-w-0">
-                <h4 className="font-bold text-slate-900 text-[14px] leading-tight mb-1">{cTr.name}</h4>
-                <div className="text-slate-500 text-[12px]">{cTr.org}</div>
+                <h4 className="font-bold text-slate-900 text-[17px] leading-snug mb-1 group-hover:text-blue-700 transition-colors">{cTr.name}</h4>
+                <div className="text-slate-500 font-bold text-[14px] uppercase tracking-wider">{cTr.org}</div>
               </div>
               
               {c.file && (
-                <div className="text-slate-300">
+                <div className="text-slate-300 group-hover:text-blue-400 transition-colors">
                   <ExternalLink className="w-4 h-4" />
                 </div>
               )}

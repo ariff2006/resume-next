@@ -12,50 +12,49 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ data, lang
   const labels = data.labels[lang] || data.labels.th;
 
   return (
-    <section className="space-y-12">
-      <div className="flex items-center gap-6 mb-12 border-b-4 border-slate-900 pb-4">
-        <div className="w-16 h-16 rounded-2xl bg-slate-900 text-white flex items-center justify-center shadow-lg">
-          <Briefcase className="w-9 h-9" />
-        </div>
-        <h2 className="text-[26px] font-bold text-slate-900 uppercase tracking-widest">
+    <section className="space-y-16">
+      {/* SECTION HEADER */}
+      <div className="flex items-center gap-5 mb-14 border-b-4 border-slate-900 pb-4">
+        <Briefcase className="w-9 h-9 text-slate-900" />
+        <h2 className="text-[26px] font-black text-slate-900 uppercase tracking-widest">
           {labels.experienceTitle}
         </h2>
       </div>
 
-      <div className="space-y-20">
+      <div className="space-y-24">
         {data.experience.map((item) => {
           const iTr = item.translations[lang] || item.translations.th;
           return (
-            <div key={item.id} className="relative border-l-4 border-slate-100 pl-8 ml-2">
-              {/* Timeline Marker */}
-              <div className="absolute -left-[14px] top-0 w-6 h-6 rounded-full bg-white border-4 border-slate-900 shadow-sm"></div>
-
-              <div className="flex flex-col gap-6">
+            <div key={item.id} className="relative group">
+              <div className="flex flex-col gap-8">
+                {/* Header Info */}
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
                   <div className="space-y-2">
-                    <h3 className="text-[28px] font-bold text-slate-900 leading-tight">
+                    <h3 className="text-[30px] font-black text-slate-900 leading-tight">
                       {iTr.title}
                     </h3>
-                    <div className="flex items-center gap-3 text-slate-700 font-bold text-[18px]">
-                      <Building2 className="w-5 h-5 text-blue-700" />
-                      <span className="border-b-2 border-blue-100">{iTr.org}</span>
+                    <div className="flex items-center gap-3 text-blue-700 font-black text-[20px]">
+                      <Building2 className="w-6 h-6" />
+                      <span>{iTr.org}</span>
                     </div>
                   </div>
-                  <div className="px-5 py-2 bg-slate-100 text-slate-900 text-[14px] font-bold uppercase tracking-wider rounded border border-slate-200 whitespace-nowrap shadow-sm">
+                  <div className="text-slate-500 text-[15px] font-black uppercase tracking-wider bg-slate-50 px-4 py-2 rounded-lg border border-slate-100 whitespace-nowrap shadow-sm">
                     {iTr.meta}
                   </div>
                 </div>
                 
+                {/* Content */}
                 <div className="bg-white">
                   <RichText text={iTr.bullets} />
                   
+                  {/* Highlights Card */}
                   {iTr.highlight && (
-                    <div className="mt-10 bg-slate-50 p-10 rounded-2xl border-2 border-slate-200 relative overflow-hidden shadow-inner">
-                      <div className="flex items-center gap-4 text-slate-900 font-bold text-[18px] uppercase tracking-wide mb-6 pb-4 border-b border-slate-300">
-                        <Trophy className="w-7 h-7 text-blue-800" />
+                    <div className="mt-10 bg-blue-50/50 p-8 rounded-2xl border border-blue-100 relative overflow-hidden shadow-sm">
+                      <div className="flex items-center gap-3 text-blue-900 font-black text-[16px] uppercase tracking-wide mb-6">
+                        <Trophy className="w-6 h-6 text-blue-600" />
                         {labels.keyResult}
                       </div>
-                      <div className="relative z-10 text-[17px] font-medium text-slate-800 leading-relaxed">
+                      <div className="relative z-10">
                         <RichText text={iTr.highlight} />
                       </div>
                     </div>
