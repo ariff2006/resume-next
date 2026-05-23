@@ -15,18 +15,21 @@ export async function GET() {
   try {
     // Try Supabase if configured
     if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-      // Use standard supabase for public GET
-      const { data, error } = await supabase
-        .from('resumes')
-        .select('content')
-        .eq('id', 1)
-        .single();
+      if (!supabase) {
+        console.log('Supabase client failed to initialize, falling back to local JSON');
+      } else {
+        // Use standard supabase for public GET
+        const { data, error } = await supabase
+          .from('resumes')
+          .select('content')
+          .eq('id', 1)
+          .single();
 
-      // Only use Supabase data if content is non-empty
-      if (!error && data && data.content && Object.keys(data.content).length > 0) {
-        return NextResponse.json(data.content);
+        // Only use Supabase data if content is non-empty
+        if (!error && data && data.content && Object.keys(data.content).length > 0) {
+          return NextResponse.json(data.content);
+        }
       }
-      console.log('Supabase fetch failed or no data, falling back to local JSON');
     }
 
     // Fallback to local JSON for development
