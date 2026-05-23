@@ -42,14 +42,15 @@ export default function ProfileAdmin() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
+      const result = await res.json();
       if (res.ok) {
         setMessage({ text: 'บันทึกข้อมูลสำเร็จ', type: 'success' });
         setTimeout(() => setMessage(null), 3000);
       } else {
-        setMessage({ text: 'เกิดข้อผิดพลาดในการบันทึก', type: 'error' });
+        setMessage({ text: result.error || 'เกิดข้อผิดพลาดในการบันทึก', type: 'error' });
       }
     } catch (e) {
-      setMessage({ text: 'Error saving data', type: 'error' });
+      setMessage({ text: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้', type: 'error' });
     }
     setSaving(false);
   };
