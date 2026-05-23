@@ -112,7 +112,7 @@ export default function ProfileAdmin() {
   if (!data) return <div>Error loading data</div>;
 
   // Helper to get image source
-  const getImageSrc = (path: string | undefined) => {
+  const getImageSrc = (path?: string) => {
     if (!path) return 'https://ui-avatars.com/api/?name=User&size=200';
     if (path.startsWith('http')) return path;
     return `/${path}`;
@@ -172,7 +172,7 @@ export default function ProfileAdmin() {
             <div className="relative group">
               <div className="w-48 h-60 rounded-3xl overflow-hidden border-4 border-white shadow-xl bg-slate-100">
                 <img 
-                  src={getImageSrc(data.personal.photo)} 
+                  src={getImageSrc(data?.personal?.photo)} 
                   alt="Profile" 
                   className="w-full h-full object-cover object-top"
                 />
