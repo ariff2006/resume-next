@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { supabase, supabaseAdmin } from '@/lib/supabase';
 import { cookies } from 'next/headers';
+// redeploy trigger: env vars updated
 import fs from 'fs';
 import path from 'path';
 
