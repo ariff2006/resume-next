@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
@@ -37,6 +38,12 @@ const navItems: NavItem[] = [
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    router.push('/admin/login');
+  };
   const pathname = usePathname();
 
   return (
@@ -87,7 +94,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
           {/* User Section Bottom */}
           <div className="p-4 border-t border-slate-100">
-            <button className="flex items-center w-full px-3 py-3 text-slate-500 hover:bg-red-50 hover:text-red-600 rounded-xl transition-colors duration-200">
+            <button onClick={handleLogout} className="flex items-center w-full px-3 py-3 text-slate-500 hover:bg-red-50 hover:text-red-600 rounded-xl transition-colors duration-200">
               <LogOut size={20} />
               {isSidebarOpen && <span className="ml-3 text-[17px]">ออกจากระบบ</span>}
             </button>
@@ -141,16 +148,4 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=Patiwat+Meekaeo&background=0071e3&color=fff';
                   }}
                 />
-              </div>
-            </div>
-          </div>
-        </header>
-
-        {/* Content Area */}
-        <div className="flex-1 p-8 overflow-y-auto">
-          {children}
-        </div>
-      </main>
-    </div>
-  );
-}
+ 
