@@ -148,4 +148,32 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=Patiwat+Meekaeo&background=0071e3&color=fff';
                   }}
                 />
- 
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Content Area */}
+        <div className="flex-1 p-8 overflow-y-auto">
+          {children}
+        </div>
+      </main>
+    </div>
+  );
+}
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Content Area */}
+        <div className="flex-1 p-8 overflow-y-auto">
+          {children}
+        </div>
+      </main>
+    </div>
+  );
+}
+>
+  );
+}
