@@ -1,501 +1,152 @@
 'use client';
-
-import React, { useState, useEffect } from 'react';
-import { ResumeData } from '@/types/resume';
-import { 
-  Save, 
-  ArrowLeft, 
-  Loader2, 
-  User, 
-  Briefcase, 
-  GraduationCap, 
-  Award, 
-  Settings, 
-  Plus, 
-  Trash2, 
-  ChevronUp, 
-  ChevronDown, 
-  Globe, 
-  LayoutDashboard, 
-  FileText,
-  ShieldCheck,
-  Menu
-} from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import {
+  User,
+  Briefcase,
+  GraduationCap,
+  Settings,
+  Award,
+  ArrowRight,
+  Eye,
+  Loader2
+} from 'lucide-react';
+import { ResumeData } from '@/types/resume';
 
-type Section = 'personal' | 'experience' | 'education' | 'skills' | 'certs';
-type Language = 'th' | 'en' | 'zh';
-
-export default function AdminPage() {
+export default function AdminDashboard() {
   const [data, setData] = useState<ResumeData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-  const [message, setMessage] = useState<{ text: string, type: 'success' | 'error' } | null>(null);
-  const [activeSection, setActiveSection] = useState<Section>('personal');
-  const [activeLang, setActiveLang] = useState<Language>('th');
-  const [uploading, setUploading] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('/api/resume')
-      .then(res => res.json())
-      .then(d => {
+      .then((res) => res.json())
+      .then((d) => {
         setData(d);
         setLoading(false);
-      });
+      })
+      .catch(() => setLoading(false));
   }, []);
 
-  const handleSave = async () => {
-    if (!data) return;
-    setSaving(true);
-    try {
-      const res = await fetch('/api/resume', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      if (res.ok) {
-        setMessage({ text: 'บันทึกข้อมูลสำเร็จ', type: 'success' });
-        setTimeout(() => setMessage(null), 3000);
-      } else {
-        setMessage({ text: 'เกิดข้อผิดพลาดในการบันทึก', type: 'error' });
-      }
-    } catch (e) {
-      setMessage({ text: 'Error saving data', type: 'error' });
-    }
-    setSaving(false);
-  };
-
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: 'photos' | 'certs', callback: (path: string) => void) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    setUploading(type);
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('type', type);
-
-    try {
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      const result = await res.json();
-      if (result.ok) {
-        callback(result.path);
-        setMessage({ text: 'อัปโหลดสำเร็จ!', type: 'success' });
-        setTimeout(() => setMessage(null), 3000);
-      } else {
-        setMessage({ text: result.error || 'อัปโหลดล้มเหลว', type: 'error' });
-      }
-    } catch (error) {
-      setMessage({ text: 'เกิดข้อผิดพลาดในการเชื่อมต่อ', type: 'error' });
-    } finally {
-      setUploading(null);
-    }
-  };
-
-  if (loading) return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center font-prompt text-slate-800 antialiased pb-20">
-      <div className="flex flex-col items-center gap-4">
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
         <Loader2 className="w-10 h-10 text-blue-600 animate-spin" />
-        <p className="text-slate-400 font-bold uppercase tracking-widest text-sm">Loading Console...</p>
       </div>
-    </div>
-  );
+    );
+  }
 
-  if (!data) return <div className="p-20 text-center font-bold text-red-500 font-prompt">Failed to load system data.</div>;
-
-  const NavItem = ({ section, icon: Icon, label }: { section: Section, icon: any, label: string }) => (
-    <button
-      onClick={() => setActiveSection(section)}
-      className={`w-full flex items-center gap-4 px-6 py-4 rounded-xl transition-all ${
-        activeSection === section 
-          ? 'bg-slate-900 text-white shadow-lg translate-x-1' 
-          : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'
-      }`}
-    >
-      <Icon className={`w-5 h-5 ${activeSection === section ? 'text-white' : 'text-slate-400'}`} />
-      <span className="font-bold text-[18px]">{label}</span>
-    </button>
-  );
-
-  const LangTabs = () => (
-    <div className="flex gap-2 bg-slate-100 p-1.5 rounded-full mb-10 w-fit border border-slate-200">
-      {(['th', 'en', 'zh'] as const).map(l => (
-        <button
-          key={l}
-          onClick={() => setActiveLang(l)}
-          className={`px-8 py-2 rounded-full text-[14px] font-black uppercase transition-all ${
-            activeLang === l 
-              ? 'bg-slate-900 text-white shadow-sm' 
-              : 'text-slate-400 hover:text-slate-600'
-          }`}
-        >
-          {l === 'th' ? 'Thai' : l === 'en' ? 'English' : 'Chinese'}
-        </button>
-      ))}
-    </div>
-  );
-
-  const SectionHeader = ({ icon: Icon, title }: { icon: any, title: string }) => (
-    <div className="flex items-center gap-4 border-b-4 border-slate-900 pb-4 mb-10">
-      <Icon className="w-7 h-7 text-slate-900" />
-      <h3 className="text-[24px] font-black text-slate-900 uppercase tracking-widest">{title}</h3>
-    </div>
-  );
-
-  const FieldLabel = ({ children }: { children: React.ReactNode }) => (
-    <label className="text-[16px] font-black text-slate-500 uppercase tracking-wide block mb-2 ml-1">
-      {children}
-    </label>
-  );
-
-  const updatePersonal = (field: string, value: any, isTranslatable = false) => {
-    const newData = { ...data };
-    if (isTranslatable) {
-      const [lang, key] = field.split('.');
-      (newData.personal.translations as any)[lang][key] = value;
-    } else {
-      (newData.personal as any)[field] = value;
+  const cards = [
+    {
+      href: '/admin/profile',
+      icon: User,
+      title: 'ประวัติส่วนตัว',
+      desc: 'แก้ไขชื่อ, ตำแหน่ง, อีเมล, รูปโปรไฟล์, บทสรุป',
+      count: '1',
+      color: 'from-blue-500 to-blue-600'
+    },
+    {
+      href: '/admin/experience',
+      icon: Briefcase,
+      title: 'ประสบการณ์ทำงาน',
+      desc: 'จัดการรายการประสบการณ์ทำงานในแต่ละบริษัท',
+      count: data?.experience?.length?.toString() || '0',
+      color: 'from-purple-500 to-purple-600'
+    },
+    {
+      href: '/admin/education',
+      icon: GraduationCap,
+      title: 'การศึกษา',
+      desc: 'แก้ไขประวัติการศึกษา / วุฒิ',
+      count: data?.education?.length?.toString() || '0',
+      color: 'from-green-500 to-green-600'
+    },
+    {
+      href: '/admin/skills',
+      icon: Settings,
+      title: 'ทักษะความสามารถ',
+      desc: 'จัดหมวดทักษะและ Tags',
+      count: data?.skills?.length?.toString() || '0',
+      color: 'from-orange-500 to-orange-600'
+    },
+    {
+      href: '/admin/certs',
+      icon: Award,
+      title: 'ใบรับรอง / อบรม',
+      desc: 'อัปโหลดใบประกาศนียบัตรและจัดการรายการ',
+      count: data?.certs?.length?.toString() || '0',
+      color: 'from-pink-500 to-pink-600'
     }
-    setData(newData);
-  };
-
-  const addItem = (section: 'experience' | 'education' | 'skills' | 'certs') => {
-    const newData = { ...data };
-    const id = `${section.substring(0, 3)}-${Date.now()}`;
-    let newItem: any;
-    
-    if (section === 'experience') {
-      newItem = { id, translations: { th: { title: '', org: '', meta: '', bullets: [] }, en: { title: '', org: '', meta: '', bullets: [] }, zh: { title: '', org: '', meta: '', bullets: [] } } };
-    } else if (section === 'education') {
-      newItem = { id, translations: { th: { title: '', org: '', meta: '' }, en: { title: '', org: '', meta: '' }, zh: { title: '', org: '', meta: '' } } };
-    } else if (section === 'skills') {
-      newItem = { id, translations: { th: { label: '', tags: [] }, en: { label: '', tags: [] }, zh: { label: '', tags: [] } } };
-    } else if (section === 'certs') {
-      newItem = { id, translations: { th: { name: '', org: '' }, en: { name: '', org: '' }, zh: { name: '', org: '' } } };
-    }
-    
-    (newData[section] as any).push(newItem);
-    setData(newData);
-  };
-
-  const removeItem = (section: 'experience' | 'education' | 'skills' | 'certs', id: string) => {
-    if (!confirm('ยืนยันการลบข้อมูลนี้?')) return;
-    const newData = { ...data };
-    (newData[section] as any) = (newData[section] as any).filter((item: any) => item.id !== id);
-    setData(newData);
-  };
-
-  const moveItem = (section: 'experience', index: number, direction: 'up' | 'down') => {
-    const newData = { ...data };
-    const targetIndex = direction === 'up' ? index - 1 : index + 1;
-    if (targetIndex < 0 || targetIndex >= newData[section].length) return;
-    const temp = newData[section][index];
-    newData[section][index] = newData[section][targetIndex];
-    newData[section][targetIndex] = temp;
-    setData(newData);
-  };
+  ];
 
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col md:flex-row text-slate-800 antialiased font-sarabun selection:bg-blue-100 selection:text-blue-900">
-      
-      {/* ALIGNED SIDEBAR */}
-      <aside className="w-full md:w-72 bg-white border-r-2 border-slate-200 flex flex-col shadow-sm print:hidden">
-        <div className="p-8 border-b border-slate-100 flex items-center gap-4 bg-slate-50/50">
-          <div className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center shadow-lg">
-            <ShieldCheck className="w-6 h-6" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-black text-[18px] text-slate-900 tracking-tight leading-none uppercase">Admin</span>
-            <span className="text-[14px] font-black text-slate-400 uppercase tracking-widest mt-1">Management</span>
-          </div>
-        </div>
-        <nav className="flex-1 p-6 space-y-2">
-          <NavItem section="personal" icon={User} label="ข้อมูลส่วนตัว" />
-          <NavItem section="experience" icon={Briefcase} label="ประสบการณ์ทำงาน" />
-          <NavItem section="education" icon={GraduationCap} label="การศึกษา" />
-          <NavItem section="skills" icon={Settings} label="ทักษะความสามารถ" />
-          <NavItem section="certs" icon={Award} label="ใบรับรอง / อบรม" />
-          
-          <div className="pt-8 mt-8 border-t border-slate-100">
-            <Link href="/" className="flex items-center gap-3 px-5 py-3 text-slate-400 hover:text-slate-900 transition-all text-[16px] font-bold group">
-              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" /> ดูหน้า Resume
-            </Link>
-          </div>
-        </nav>
-      </aside>
+    <div className="max-w-6xl mx-auto space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      {/* Header */}
+      <div>
+        <h1 className="text-4xl font-bold text-slate-900 tracking-tight">
+          ภาพรวม Dashboard
+        </h1>
+        <p className="text-slate-500 mt-2 text-lg">
+          เลือกหมวดที่ต้องการแก้ไขข้อมูล Resume ของคุณ
+        </p>
+      </div>
 
-      {/* MAIN EDITOR AREA */}
-      <main className="flex-1 flex flex-col h-screen overflow-hidden">
-        
-        <header className="bg-white h-20 border-b-2 border-slate-100 flex items-center justify-between px-10 sticky top-0 z-50 shadow-sm">
-          <div className="flex items-center gap-4">
-            <Menu className="w-5 h-5 text-slate-300" />
-            <h2 className="font-black text-slate-900 text-[18px] uppercase tracking-widest">{activeSection}</h2>
-          </div>
-          
-          <div className="flex items-center gap-6">
-            {message && (
-              <div className={`px-6 py-2 rounded-full text-[14px] font-black uppercase tracking-wider animate-in fade-in slide-in-from-top-4 ${
-                message.type === 'success' ? 'bg-blue-50 text-blue-700 border border-blue-100' : 'bg-red-50 text-red-700 border border-red-100'
-              }`}>
-                {message.text}
-              </div>
-            )}
-            <button 
-              onClick={handleSave} 
-              disabled={saving} 
-              className="bg-slate-900 hover:bg-slate-800 text-white px-10 py-3 rounded-full font-black text-[15px] uppercase tracking-widest shadow-xl disabled:opacity-50 transition-all flex items-center gap-2 active:scale-95"
-            >
-              {saving ? <Loader2 className="w-5 h-5 animate-spin text-white" /> : <Save className="w-5 h-5" />}
-              {saving ? 'SAVING...' : 'SAVE CHANGES'}
-            </button>
-          </div>
-        </header>
-
-        <div className="flex-1 overflow-y-auto p-10 md:p-14 bg-slate-50/50">
-          <div className="max-w-[1000px] mx-auto w-full space-y-12 pb-32">
-            
-            <div className="flex items-center justify-between">
-               <LangTabs />
-               <span className="text-[14px] font-black text-slate-300 uppercase tracking-widest">Editing Mode: Real-time Sync</span>
+      {/* Quick stats */}
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        {cards.map((c) => (
+          <div
+            key={c.href}
+            className="bg-white border border-slate-200 rounded-2xl p-5 text-center shadow-sm"
+          >
+            <div className="text-3xl font-black text-slate-900">{c.count}</div>
+            <div className="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-wide">
+              {c.title}
             </div>
-
-            {/* PERSONAL SECTION */}
-            {activeSection === 'personal' && (
-              <div className="space-y-12 animate-in fade-in duration-500">
-                <SectionHeader icon={User} title="Personal Information" />
-                <div className="bg-white rounded-3xl shadow-sm border border-slate-200 p-12 flex flex-col md:flex-row gap-12">
-                  <div className="flex flex-col items-center gap-6 flex-shrink-0">
-                    <div className="w-48 h-60 rounded-2xl overflow-hidden border-4 border-slate-50 shadow-md bg-slate-100">
-                      <img src={`/${data.personal.photo || 'photos/placeholder.jpg'}`} className="w-full h-full object-cover object-top" />
-                    </div>
-                    {uploading === 'photos' && <Loader2 className="w-6 h-6 animate-spin text-blue-600" />}
-                    <label className="cursor-pointer text-[14px] font-black text-blue-700 hover:underline uppercase tracking-wider">
-                      Change Photo <input type="file" className="hidden" accept="image/*" onChange={(e) => handleFileUpload(e, 'photos', (path) => updatePersonal('photo', path))} />
-                    </label>
-                  </div>
-                  
-                  <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-1">
-                      <FieldLabel>Email Address</FieldLabel>
-                      <input className="w-full px-5 py-3 border-b-2 border-slate-100 focus:border-slate-900 outline-none transition-all text-slate-900 font-bold text-[18px] bg-transparent" value={data.personal.email} onChange={(e) => updatePersonal('email', e.target.value)} />
-                    </div>
-                    <div className="space-y-1">
-                      <FieldLabel>Phone Number</FieldLabel>
-                      <input className="w-full px-5 py-3 border-b-2 border-slate-100 focus:border-slate-900 outline-none transition-all text-slate-900 font-bold text-[18px] bg-transparent" value={data.personal.phone} onChange={(e) => updatePersonal('phone', e.target.value)} />
-                    </div>
-                    
-                    <div className="md:col-span-2 pt-10 space-y-10">
-                      <div className="space-y-1">
-                        <FieldLabel>Full Name ({activeLang.toUpperCase()})</FieldLabel>
-                        <input className="w-full px-5 py-3 border-b-2 border-slate-100 focus:border-slate-900 outline-none transition-all text-[24px] text-slate-900 font-black bg-transparent" value={data.personal.translations[activeLang].name} onChange={(e) => updatePersonal(`${activeLang}.name`, e.target.value, true)} />
-                      </div>
-                      <div className="space-y-1">
-                        <FieldLabel>Professional Title</FieldLabel>
-                        <input className="w-full px-5 py-3 border-b-2 border-slate-100 focus:border-slate-900 outline-none transition-all text-slate-900 font-bold text-[18px] bg-transparent" value={data.personal.translations[activeLang].title} onChange={(e) => updatePersonal(`${activeLang}.title`, e.target.value, true)} />
-                      </div>
-                      <div className="space-y-2">
-                        <FieldLabel>Executive Summary</FieldLabel>
-                        <textarea rows={10} className="w-full p-8 rounded-3xl border-2 border-slate-100 focus:border-slate-900 outline-none transition-all text-slate-700 font-medium text-[18px] leading-relaxed bg-slate-50/30" value={data.personal.translations[activeLang].summary} onChange={(e) => updatePersonal(`${activeLang}.summary`, e.target.value, true)} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* EXPERIENCE SECTION */}
-            {activeSection === 'experience' && (
-              <div className="space-y-12 animate-in fade-in duration-500">
-                <div className="flex justify-between items-center">
-                  <SectionHeader icon={Briefcase} title="Work Experience" />
-                  <button onClick={() => addItem('experience')} className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2.5 rounded-full font-black text-[14px] uppercase tracking-wider shadow-lg flex items-center gap-2">
-                    <Plus className="w-4 h-4" /> Add Item
-                  </button>
-                </div>
-                
-                <div className="space-y-10">
-                  {data.experience.map((item, idx) => (
-                    <div key={item.id} className="bg-white rounded-[2rem] border-2 border-slate-100 p-10 space-y-10 hover:border-slate-200 transition-all shadow-sm">
-                      <div className="flex justify-between items-start border-b-2 border-slate-50 pb-4">
-                        <span className="text-[20px] font-black text-slate-300 uppercase tracking-widest">Entry #0{idx + 1}</span>
-                        <div className="flex gap-2">
-                          <button onClick={() => moveItem('experience', idx, 'up')} disabled={idx === 0} className="p-2 hover:bg-slate-50 rounded-lg text-slate-400 disabled:opacity-20"><ChevronUp className="w-6 h-6" /></button>
-                          <button onClick={() => moveItem('experience', idx, 'down')} disabled={idx === data.experience.length - 1} className="p-2 hover:bg-slate-50 rounded-lg text-slate-400 disabled:opacity-20"><ChevronDown className="w-6 h-6" /></button>
-                          <button onClick={() => removeItem('experience', item.id)} className="p-2 hover:bg-red-50 rounded-lg text-red-300 hover:text-red-500"><Trash2 className="w-6 h-6" /></button>
-                        </div>
-                      </div>
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                        <div className="space-y-1">
-                          <FieldLabel>Title</FieldLabel>
-                          <input className="w-full py-3 border-b-2 border-slate-100 focus:border-slate-900 outline-none text-slate-900 font-bold text-[18px] bg-transparent" value={item.translations[activeLang].title} onChange={(e) => { const newData = { ...data }; newData.experience[idx].translations[activeLang].title = e.target.value; setData(newData); }} />
-                        </div>
-                        <div className="space-y-1">
-                          <FieldLabel>Organization</FieldLabel>
-                          <input className="w-full py-3 border-b-2 border-slate-100 focus:border-slate-900 outline-none text-slate-900 font-bold text-[18px] bg-transparent" value={item.translations[activeLang].org} onChange={(e) => { const newData = { ...data }; newData.experience[idx].translations[activeLang].org = e.target.value; setData(newData); }} />
-                        </div>
-                        <div className="space-y-1">
-                          <FieldLabel>Period</FieldLabel>
-                          <input className="w-full py-3 border-b-2 border-slate-100 focus:border-slate-900 outline-none text-slate-900 font-bold text-[18px] bg-transparent" value={item.translations[activeLang].meta} onChange={(e) => { const newData = { ...data }; newData.experience[idx].translations[activeLang].meta = e.target.value; setData(newData); }} />
-                        </div>
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <FieldLabel>Responsibilities (One per line)</FieldLabel>
-                        <textarea rows={12} className="w-full p-8 rounded-3xl border-2 border-slate-50 focus:border-slate-900 outline-none transition-all font-medium text-slate-600 text-[18px] leading-[1.8] bg-slate-50/50" value={item.translations[activeLang].bullets.join('\n')} onChange={(e) => { const newData = { ...data }; newData.experience[idx].translations[activeLang].bullets = e.target.value.split('\n'); setData(newData); }} />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <FieldLabel>Key Highlights</FieldLabel>
-                        <textarea rows={6} className="w-full p-8 rounded-3xl border-2 border-blue-50 bg-blue-50/10 focus:border-slate-900 outline-none transition-all font-bold text-slate-800 text-[18px] leading-[1.8]" value={item.translations[activeLang].highlight || ''} onChange={(e) => { const newData = { ...data }; newData.experience[idx].translations[activeLang].highlight = e.target.value; setData(newData); }} />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* EDUCATION SECTION */}
-            {activeSection === 'education' && (
-              <div className="space-y-12 animate-in fade-in duration-500">
-                <div className="flex justify-between items-center">
-                  <SectionHeader icon={GraduationCap} title="Education History" />
-                  <button onClick={() => addItem('education')} className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2.5 rounded-full font-black text-[14px] uppercase tracking-wider shadow-lg flex items-center gap-2">
-                    <Plus className="w-4 h-4" /> Add Item
-                  </button>
-                </div>
-                
-                <div className="space-y-8">
-                  {data.education.map((item, idx) => (
-                    <div key={item.id} className="bg-white rounded-3xl border-2 border-slate-100 p-10 space-y-10 shadow-sm relative overflow-hidden">
-                      <div className="flex justify-between items-center border-b-2 border-slate-50 pb-6">
-                        <div className="flex items-center gap-4 text-blue-700">
-                           <GraduationCap className="w-8 h-8" />
-                           <span className="font-black uppercase tracking-widest text-[16px]">Entry #{idx + 1}</span>
-                        </div>
-                        <button onClick={() => removeItem('education', item.id)} className="p-2 hover:bg-red-50 rounded text-red-300 hover:text-red-500"><Trash2 className="w-6 h-6" /></button>
-                      </div>
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                        <div className="space-y-1">
-                          <FieldLabel>Degree</FieldLabel>
-                          <input className="w-full py-3 border-b-2 border-slate-100 focus:border-slate-900 outline-none text-slate-900 font-bold text-[18px] bg-transparent" value={item.translations[activeLang].title} onChange={(e) => { const newData = { ...data }; newData.education[idx].translations[activeLang].title = e.target.value; setData(newData); }} />
-                        </div>
-                        <div className="space-y-1">
-                          <FieldLabel>Institution</FieldLabel>
-                          <input className="w-full py-3 border-b-2 border-slate-100 focus:border-slate-900 outline-none text-slate-900 font-bold text-[18px] bg-transparent" value={item.translations[activeLang].org} onChange={(e) => { const newData = { ...data }; newData.education[idx].translations[activeLang].org = e.target.value; setData(newData); }} />
-                        </div>
-                        <div className="space-y-1">
-                          <FieldLabel>Meta Info</FieldLabel>
-                          <input className="w-full py-3 border-b-2 border-slate-100 focus:border-slate-900 outline-none text-slate-900 font-bold text-[18px] bg-transparent" value={item.translations[activeLang].meta} onChange={(e) => { const newData = { ...data }; newData.education[idx].translations[activeLang].meta = e.target.value; setData(newData); }} />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* SKILLS SECTION */}
-            {activeSection === 'skills' && (
-              <div className="space-y-12 animate-in fade-in duration-500">
-                <div className="flex justify-between items-center">
-                  <SectionHeader icon={Settings} title="Skills & Tags" />
-                  <button onClick={() => addItem('skills')} className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2.5 rounded-full font-black text-[14px] uppercase tracking-wider shadow-lg flex items-center gap-2">
-                    <Plus className="w-4 h-4" /> Add Category
-                  </button>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                  {data.skills.map((item, idx) => (
-                    <div key={item.id} className="bg-white rounded-3xl border-2 border-slate-100 p-10 space-y-8 shadow-sm hover:border-slate-200 transition-all">
-                      <div className="flex justify-between items-center border-b-2 border-slate-50 pb-4">
-                        <input className="text-[20px] font-black text-slate-900 border-none outline-none focus:ring-0 bg-transparent w-full uppercase" value={item.translations[activeLang].label} onChange={(e) => { const newData = { ...data }; newData.skills[idx].translations[activeLang].label = e.target.value; setData(newData); }} placeholder="CATEGORY NAME" />
-                        <button onClick={() => removeItem('skills', item.id)} className="text-slate-200 hover:text-red-500 transition-all"><Trash2 className="w-5 h-5" /></button>
-                      </div>
-                      <div className="space-y-3">
-                        <FieldLabel>Tags (Comma separated)</FieldLabel>
-                        <textarea rows={5} className="w-full text-[17px] border-2 border-slate-50 rounded-2xl p-6 focus:border-slate-900 outline-none transition-all text-slate-900 font-bold bg-slate-50/30 leading-relaxed" value={item.translations[activeLang].tags.join(', ')} onChange={(e) => { const newData = { ...data }; newData.skills[idx].translations[activeLang].tags = e.target.value.split(',').map(t => t.trim()).filter(t => t !== ''); setData(newData); }} />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* CERTS SECTION */}
-            {activeSection === 'certs' && (
-              <div className="space-y-12 animate-in fade-in duration-500">
-                <div className="flex justify-between items-center">
-                  <SectionHeader icon={Award} title="Certificates" />
-                  <button onClick={() => addItem('certs')} className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2.5 rounded-full font-black text-[14px] uppercase tracking-wider shadow-lg flex items-center gap-2">
-                    <Plus className="w-4 h-4" /> Add Item
-                  </button>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                  {data.certs.map((item, idx) => (
-                    <div key={item.id} className="bg-white rounded-3xl border-2 border-slate-100 p-10 space-y-8 shadow-sm hover:border-slate-200 transition-all">
-                      <div className="flex justify-between items-start gap-4">
-                        <div className="flex-1 space-y-6">
-                          <div className="space-y-1">
-                            <FieldLabel>Certificate Name</FieldLabel>
-                            <input className="font-black text-slate-900 text-[18px] w-full border-b-2 border-slate-50 focus:border-slate-900 outline-none bg-transparent" value={item.translations[activeLang].name} onChange={(e) => { const newData = { ...data }; newData.certs[idx].translations[activeLang].name = e.target.value; setData(newData); }} />
-                          </div>
-                          <div className="space-y-1">
-                            <FieldLabel>Issuer</FieldLabel>
-                            <input className="w-full text-[16px] text-slate-500 font-bold border-b-2 border-slate-50 focus:border-slate-900 outline-none bg-transparent" value={item.translations[activeLang].org} onChange={(e) => { const newData = { ...data }; newData.certs[idx].translations[activeLang].org = e.target.value; setData(newData); }} />
-                          </div>
-                        </div>
-                        <button onClick={() => removeItem('certs', item.id)} className="text-slate-200 hover:text-red-500 transition-all"><Trash2 className="w-6 h-6" /></button>
-                      </div>
-                      
-                      <div className="pt-6 bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                        <FieldLabel>Supporting Document</FieldLabel>
-                        <div className="flex gap-4 items-center">
-                          <FileText className="w-6 h-6 text-slate-300" />
-                          <input className="flex-1 text-[13px] bg-transparent outline-none text-slate-400 font-mono" readOnly value={item.file || 'No document attached'} />
-                          <label className="cursor-pointer bg-white px-6 py-2 rounded-full shadow-sm text-blue-700 text-[13px] font-black border border-slate-100 hover:bg-slate-900 hover:text-white transition-all">
-                            UPLOAD <input type="file" className="hidden" onChange={(e) => handleFileUpload(e, 'certs', (p) => { const newData = { ...data }; newData.certs[idx].file = p; setData(newData); })} />
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
-        </div>
-      </main>
+        ))}
+      </div>
 
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap');
-        
-        body {
-          background-color: #f1f5f9;
-        }
+      {/* Main cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {cards.map((c) => {
+          const Icon = c.icon;
+          return (
+            <Link
+              key={c.href}
+              href={c.href}
+              className="group bg-white border-2 border-slate-100 rounded-3xl p-7 hover:border-slate-300 hover:shadow-xl transition-all"
+            >
+              <div
+                className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${c.color} text-white flex items-center justify-center shadow-lg mb-4 group-hover:scale-110 transition-transform`}
+              >
+                <Icon className="w-7 h-7" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">{c.title}</h3>
+              <p className="text-base text-slate-500 leading-relaxed mb-4">{c.desc}</p>
+              <div className="flex items-center text-blue-600 font-semibold text-base group-hover:gap-3 transition-all gap-2">
+                แก้ไข <ArrowRight className="w-4 h-4" />
+              </div>
+            </Link>
+          );
+        })}
 
-        .font-sarabun {
-          font-family: 'Sarabun', sans-serif;
-        }
-
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #0a1120; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #1e293b; }
-
-        input, textarea {
-          font-family: 'Sarabun', sans-serif;
-        }
-
-        input::placeholder, textarea::placeholder {
-          color: #cbd5e1;
-        }
-      `}</style>
+        {/* View resume card */}
+        <Link
+          href="/"
+          target="_blank"
+          className="group bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-3xl p-7 hover:shadow-xl transition-all"
+        >
+          <div className="w-14 h-14 rounded-2xl bg-white/15 text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <Eye className="w-7 h-7" />
+          </div>
+          <h3 className="text-xl font-bold mb-2">ดู Resume สาธารณะ</h3>
+          <p className="text-base text-slate-300 leading-relaxed mb-4">
+            เปิดหน้า Resume ที่คนทั่วไปเห็น (เปิดในแท็บใหม่)
+          </p>
+          <div className="flex items-center font-semibold text-base group-hover:gap-3 transition-all gap-2">
+            เปิดดู <ArrowRight className="w-4 h-4" />
+          </div>
+        </Link>
+      </div>
     </div>
   );
 }
