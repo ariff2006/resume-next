@@ -1,19 +1,7 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap');
 
-@font-face {
-  font-family: 'TH Sarabun New';
-  src: url('/fonts/THSarabunNew.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'TH Sarabun New';
-  src: url('/fonts/THSarabunNew Bold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-}
-
-/* ===== Tailwind v4 theme override (proper syntax) ===== */
+/* ===== Tailwind v4 — bigger default scale ===== */
 @theme {
   --text-xs:   1rem;       /* 16px */
   --text-sm:   1.125rem;   /* 18px */
@@ -33,21 +21,24 @@
   --sidebar-width: 320px;
 }
 
+/* ===== ใช้ Sarabun แทน TH Sarabun New ===== */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'TH Sarabun New', sans-serif;
-  font-size: 20px;
+  font-family: 'Sarabun', 'Noto Sans Thai', system-ui, sans-serif;
+  font-size: 18px;
   line-height: 1.7;
 }
 
 input, textarea, select {
-  font-size: 20px !important;
+  font-family: 'Sarabun', 'Noto Sans Thai', system-ui, sans-serif;
+  font-size: 18px !important;
   padding: 14px 18px !important;
 }
 
 label {
-  font-size: 18px !important;
+  font-family: 'Sarabun', 'Noto Sans Thai', system-ui, sans-serif;
+  font-size: 16px !important;
   font-weight: 600 !important;
 }
 
