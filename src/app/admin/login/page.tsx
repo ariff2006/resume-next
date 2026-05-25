@@ -1,12 +1,12 @@
 'use client';
-
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Lock, Loader2, ArrowLeft, ShieldAlert } from 'lucide-react';
+import { Lock, Loader2, ArrowLeft, ShieldAlert, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 
 export default function LoginPage() {
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
@@ -15,14 +15,12 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     setError('');
-
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password })
       });
-
       if (res.ok) {
         router.push('/admin');
       } else {
@@ -46,7 +44,6 @@ export default function LoginPage() {
             <h1 className="text-2xl font-bold text-slate-800">Admin Login</h1>
             <p className="text-slate-500 text-sm mt-1">Patiwat Resume — Dashboard</p>
           </div>
-          
           <div className="p-8">
             {error && (
               <div className="mb-6 p-4 bg-red-50 border border-red-100 rounded-xl flex items-center gap-3 text-red-600 text-sm font-semibold animate-shake">
@@ -54,23 +51,32 @@ export default function LoginPage() {
                 {error}
               </div>
             )}
-            
             <form onSubmit={handleLogin} className="space-y-6">
               <div className="space-y-2">
                 <label className="text-xs font-bold text-slate-500 uppercase tracking-widest px-1">
                   Password
                 </label>
-                <input
-                  type="password"
-                  required
-                  autoFocus
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#007bff] outline-none transition-all text-center text-lg tracking-[0.5em]"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    required
+                    autoFocus
+                    className="w-full px-4 py-3 pr-12 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#007bff] outline-none transition-all text-center text-lg tracking-[0.3em]"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#007bff] transition-colors p-1"
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    tabIndex={-1}
+                  >
+                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </button>
+                </div>
               </div>
-              
               <button
                 type="submit"
                 disabled={loading}
@@ -79,19 +85,16 @@ export default function LoginPage() {
                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'เข้าสู่ระบบ'}
               </button>
             </form>
-            
             <Link href="/" className="flex items-center justify-center gap-2 mt-8 text-slate-400 hover:text-slate-600 transition-colors text-sm font-medium">
               <ArrowLeft className="w-4 h-4" />
               กลับหน้าหลัก
             </Link>
           </div>
         </div>
-        
         <p className="text-center text-white/30 text-[10px] mt-8 uppercase tracking-widest font-bold">
           Protected Area • MEC Engineering Co., Ltd.
         </p>
       </div>
-
       <style jsx global>{`
         @keyframes fade-in {
           from { opacity: 0; transform: translateY(20px); }
