@@ -13,11 +13,25 @@
   font-style: normal;
 }
 
-:root {
+/* ============================================================
+   OVERRIDE Tailwind v4 font-size scale by overriding CSS vars
+   ============================================================ */
+:root, :host {
   --background: #f8fafc;
   --foreground: #1e293b;
   --primary-blue: #0071e3;
   --sidebar-width: 320px;
+
+  /* Override Tailwind text-* variables — ทุก class text-xs ฯลฯ จะใหญ่ขึ้นทันที */
+  --text-xs:   1rem      !important;   /* 16px (default 12px) */
+  --text-sm:   1.125rem  !important;   /* 18px (default 14px) */
+  --text-base: 1.25rem   !important;   /* 20px (default 16px) */
+  --text-lg:   1.5rem    !important;   /* 24px (default 18px) */
+  --text-xl:   1.75rem   !important;   /* 28px (default 20px) */
+  --text-2xl:  2rem      !important;   /* 32px (default 24px) */
+  --text-3xl:  2.5rem    !important;   /* 40px (default 30px) */
+  --text-4xl:  3rem      !important;   /* 48px (default 36px) */
+  --text-5xl:  3.5rem    !important;   /* 56px (default 48px) */
 }
 
 @theme inline {
@@ -27,50 +41,28 @@
   --font-sarabun: 'TH Sarabun New', sans-serif;
 }
 
-/* MAXIMUM SIZE — บังคับทุกระดับ */
 html {
-  font-size: 20px !important;
+  font-size: 16px;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sarabun);
-  font-size: 24px !important;
+  font-size: 20px;
   line-height: 1.7;
 }
 
 input, textarea, select {
-  font-size: 22px !important;
-  padding: 16px 20px !important;
+  font-size: 20px !important;
+  padding: 14px 18px !important;
   line-height: 1.6 !important;
 }
 
 label {
-  font-size: 20px !important;
+  font-size: 18px !important;
   font-weight: 600 !important;
 }
-
-h1 { font-size: 44px !important; }
-h2 { font-size: 36px !important; }
-h3 { font-size: 28px !important; }
-
-/* Override Tailwind text-* utilities ทุกขนาด */
-[class*="text-xs"]   { font-size: 16px !important; }
-[class*="text-sm"]   { font-size: 18px !important; }
-[class*="text-base"] { font-size: 22px !important; }
-[class*="text-lg"]   { font-size: 24px !important; }
-[class*="text-xl"]   { font-size: 28px !important; }
-[class*="text-2xl"]  { font-size: 32px !important; }
-[class*="text-3xl"]  { font-size: 40px !important; }
-[class*="text-4xl"]  { font-size: 48px !important; }
-[class*="text-5xl"]  { font-size: 56px !important; }
-
-/* Buttons */
-button { font-size: 20px !important; }
-
-/* Spans inherit unless explicitly set */
-span:not([class*="text-"]) { font-size: inherit; }
 
 /* Custom Utilities */
 .card-shadow {
