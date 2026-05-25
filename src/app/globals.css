@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap');
 
-/* ===== Tailwind v4 — bigger default scale ===== */
+/* ===== Bigger Tailwind text scale ===== */
 @theme {
   --text-xs:   1rem;       /* 16px */
   --text-sm:   1.125rem;   /* 18px */
@@ -16,12 +16,11 @@
 
 :root {
   --background: #f8fafc;
-  --foreground: #1e293b;
-  --primary-blue: #0071e3;
+  --foreground: #0f172a;        /* darker text - was #1e293b */
+  --primary-blue: #0066cc;       /* slightly darker for contrast */
   --sidebar-width: 320px;
 }
 
-/* ===== ใช้ Sarabun แทน TH Sarabun New ===== */
 body {
   background: var(--background);
   color: var(--foreground);
@@ -30,23 +29,43 @@ body {
   line-height: 1.7;
 }
 
+/* ===== Force darker, bolder text for admin readability ===== */
 input, textarea, select {
   font-family: 'Sarabun', 'Noto Sans Thai', system-ui, sans-serif;
   font-size: 18px !important;
   padding: 14px 18px !important;
+  color: #0f172a !important;           /* near-black */
+  font-weight: 500 !important;
+  border-color: #cbd5e1 !important;    /* darker border */
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary-blue) !important;
+  box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.15) !important;
 }
 
 label {
   font-family: 'Sarabun', 'Noto Sans Thai', system-ui, sans-serif;
   font-size: 16px !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
+  color: #1e293b !important;          /* darker label */
 }
 
+/* Make slate-400 / slate-500 utilities darker */
+.text-slate-400 { color: #475569 !important; }   /* was too light */
+.text-slate-500 { color: #334155 !important; }
+.text-slate-600 { color: #1e293b !important; }
+
+/* Make light borders visible */
+.border-slate-100 { border-color: #cbd5e1 !important; }
+.border-slate-200 { border-color: #94a3b8 !important; }
+
+/* Custom Utilities */
 .card-shadow {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.08);
 }
 .glass-header {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  border-bottom: 1px solid #cbd5e1;
 }
