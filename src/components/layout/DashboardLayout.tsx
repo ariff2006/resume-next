@@ -41,116 +41,111 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   };
   const pathname = usePathname();
   return (
-    <div className="flex h-screen bg-[#f8fafc] text-[#1e293b] text-base">
-      {/* Sidebar */}
-      <aside
-        className={cn(
-          'fixed inset-y-0 left-0 z-50 bg-white border-r border-slate-200 transition-all duration-300 ease-in-out',
-          isSidebarOpen ? 'w-[290px]' : 'w-20'
-        )}
-      >
-        <div className="flex flex-col h-full">
-          {/* Logo */}
-          <div className="flex items-center h-20 px-6 border-b border-slate-100 mb-4">
-            <div className="w-10 h-10 bg-primary-blue rounded-lg flex items-center justify-center text-white font-bold text-lg shrink-0">
-              P
-            </div>
-            {isSidebarOpen && (
-              <span className="ml-3 font-bold text-2xl tracking-tight">IT Manager</span>
-            )}
-          </div>
-          {/* Navigation */}
-          <nav className="flex-1 px-4 space-y-1.5">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  'flex items-center px-4 py-3.5 rounded-xl transition-colors duration-200 group',
-                  pathname === item.href
-                    ? 'bg-blue-50 text-primary-blue font-semibold'
-                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
-                )}
-              >
-                <span className={cn(
-                  'shrink-0',
-                  pathname === item.href ? 'text-primary-blue' : 'text-slate-400 group-hover:text-slate-600'
-                )}>
-                  {item.icon}
-                </span>
-                {isSidebarOpen && (
-                  <span className="ml-3.5 text-[18px] font-medium">{item.title}</span>
-                )}
-              </Link>
-            ))}
-          </nav>
-          {/* Logout */}
-          <div className="p-4 border-t border-slate-100">
-            <button
-              onClick={handleLogout}
-              className="flex items-center w-full px-4 py-3.5 text-slate-500 hover:bg-red-50 hover:text-red-600 rounded-xl transition-colors duration-200"
-            >
-              <LogOut size={22} />
-              {isSidebarOpen && <span className="ml-3.5 text-[18px] font-medium">ออกจากระบบ</span>}
-            </button>
-          </div>
-        </div>
-      </aside>
-      {/* Main Content */}
-      <main
-        className={cn(
-          'flex-1 flex flex-col transition-all duration-300 ease-in-out',
-          isSidebarOpen ? 'ml-[290px]' : 'ml-20'
-        )}
-      >
-        {/* Top Header */}
-        <header className="h-20 glass-header sticky top-0 z-40 flex items-center justify-between px-8 bg-white/80 backdrop-blur border-b border-slate-100">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setSidebarOpen(!isSidebarOpen)}
-              className="p-2.5 hover:bg-slate-100 rounded-lg text-slate-500 transition-colors"
-            >
-              {isSidebarOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
-            <div className="hidden md:flex items-center bg-slate-100 px-5 py-2.5 rounded-full w-80">
-              <Search size={18} className="text-slate-400" />
-              <input
-                type="text"
-                placeholder="ค้นหาข้อมูล..."
-                className="bg-transparent border-none focus:ring-0 text-base ml-3 w-full outline-none"
-              />
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <button className="relative p-2.5 hover:bg-slate-100 rounded-full text-slate-500 transition-colors">
-              <Bell size={22} />
-              <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
-            </button>
-            <div className="h-8 w-px bg-slate-200 mx-2"></div>
-            <div className="flex items-center gap-3">
-              <div className="text-right hidden sm:block">
-                <p className="text-base font-semibold text-slate-900 leading-none">Patiwat M.</p>
-                <p className="text-sm text-slate-500 mt-1">Administrator</p>
+    <>
+      {/* Global font-size override for entire admin section */}
+      <style jsx global>{`
+        .admin-content { font-size: 19px; line-height: 1.7; }
+        .admin-content h1 { font-size: 40px; line-height: 1.3; }
+        .admin-content h2 { font-size: 30px; line-height: 1.3; }
+        .admin-content h3 { font-size: 24px; line-height: 1.4; }
+        .admin-content label,
+        .admin-content .form-label { font-size: 18px !important; font-weight: 600 !important; }
+        .admin-content input,
+        .admin-content textarea,
+        .admin-content select { font-size: 19px !important; padding: 14px 18px !important; line-height: 1.6; }
+        .admin-content button { font-size: 18px; }
+        .admin-content .text-xs { font-size: 15px !important; }
+        .admin-content .text-sm { font-size: 17px !important; }
+        .admin-content .text-base { font-size: 19px !important; }
+        .admin-content .text-lg { font-size: 21px !important; }
+        .admin-content .text-xl { font-size: 24px !important; }
+        .admin-content .text-2xl { font-size: 28px !important; }
+        .admin-content .text-3xl { font-size: 34px !important; }
+        .admin-content p { font-size: 19px; line-height: 1.75; }
+      `}</style>
+
+      <div className="flex h-screen bg-[#f8fafc] text-[#1e293b] text-base">
+        {/* Sidebar */}
+        <aside
+          className={cn(
+            'fixed inset-y-0 left-0 z-50 bg-white border-r border-slate-200 transition-all duration-300 ease-in-out',
+            isSidebarOpen ? 'w-[290px]' : 'w-20'
+          )}
+        >
+          <div className="flex flex-col h-full">
+            {/* Logo */}
+            <div className="flex items-center h-20 px-6 border-b border-slate-100 mb-4">
+              <div className="w-10 h-10 bg-primary-blue rounded-lg flex items-center justify-center text-white font-bold text-lg shrink-0">
+                P
               </div>
-              <div className="w-11 h-11 rounded-full bg-slate-200 border-2 border-white overflow-hidden shadow-sm">
-                <img
-                  src="/photos/profile.jpg"
-                  alt="Profile"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src =
-                      'https://ui-avatars.com/api/?name=Patiwat+Meekaeo&background=0071e3&color=fff';
-                  }}
+              {isSidebarOpen && (
+                <span className="ml-3 font-bold text-2xl tracking-tight">IT Manager</span>
+              )}
+            </div>
+            {/* Navigation */}
+            <nav className="flex-1 px-4 space-y-1.5">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    'flex items-center px-4 py-3.5 rounded-xl transition-colors duration-200 group',
+                    pathname === item.href
+                      ? 'bg-blue-50 text-primary-blue font-semibold'
+                      : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                  )}
+                >
+                  <span className={cn(
+                    'shrink-0',
+                    pathname === item.href ? 'text-primary-blue' : 'text-slate-400 group-hover:text-slate-600'
+                  )}>
+                    {item.icon}
+                  </span>
+                  {isSidebarOpen && (
+                    <span className="ml-3.5 text-[18px] font-medium">{item.title}</span>
+                  )}
+                </Link>
+              ))}
+            </nav>
+            {/* Logout */}
+            <div className="p-4 border-t border-slate-100">
+              <button
+                onClick={handleLogout}
+                className="flex items-center w-full px-4 py-3.5 text-slate-500 hover:bg-red-50 hover:text-red-600 rounded-xl transition-colors duration-200"
+              >
+                <LogOut size={22} />
+                {isSidebarOpen && <span className="ml-3.5 text-[18px] font-medium">ออกจากระบบ</span>}
+              </button>
+            </div>
+          </div>
+        </aside>
+        {/* Main Content */}
+        <main
+          className={cn(
+            'flex-1 flex flex-col transition-all duration-300 ease-in-out',
+            isSidebarOpen ? 'ml-[290px]' : 'ml-20'
+          )}
+        >
+          {/* Top Header */}
+          <header className="h-20 glass-header sticky top-0 z-40 flex items-center justify-between px-8 bg-white/80 backdrop-blur border-b border-slate-100">
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => setSidebarOpen(!isSidebarOpen)}
+                className="p-2.5 hover:bg-slate-100 rounded-lg text-slate-500 transition-colors"
+              >
+                {isSidebarOpen ? <X size={22} /> : <Menu size={22} />}
+              </button>
+              <div className="hidden md:flex items-center bg-slate-100 px-5 py-2.5 rounded-full w-80">
+                <Search size={18} className="text-slate-400" />
+                <input
+                  type="text"
+                  placeholder="ค้นหาข้อมูล..."
+                  className="bg-transparent border-none focus:ring-0 text-base ml-3 w-full outline-none"
                 />
               </div>
             </div>
-          </div>
-        </header>
-        {/* Content */}
-        <div className="flex-1 p-10 overflow-y-auto text-base">
-          {children}
-        </div>
-      </main>
-    </div>
-  );
-}
+            <div className="flex items-center gap-4">
+              <button className="relative p-2.5 hover:bg-slate-100 rounded-full text-slate-500 transition-colors">
+                <Bell size={22} />
+                <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+     
