@@ -20,49 +20,46 @@
   --sidebar-width: 290px;
 }
 
-/* ==========================================================
-   Tailwind v4 — Override default font-size scale
-   ทำให้ text-sm, text-base, text-lg ฯลฯ ใหญ่ขึ้นทั้งระบบ
-   ========================================================== */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary-blue: var(--primary-blue);
   --font-sarabun: 'TH Sarabun New', sans-serif;
+}
 
-  /* Bigger font scale (default Tailwind values bumped ~20-25%) */
-  --text-xs:   15px;   /* default 12 */
-  --text-sm:   17px;   /* default 14 */
-  --text-base: 19px;   /* default 16 */
-  --text-lg:   21px;   /* default 18 */
-  --text-xl:   24px;   /* default 20 */
-  --text-2xl:  28px;   /* default 24 */
-  --text-3xl:  34px;   /* default 30 */
-  --text-4xl:  40px;   /* default 36 */
-  --text-5xl:  48px;   /* default 48 */
+/* SLEDGEHAMMER: บังคับขนาดตั้งแต่ html element */
+html {
+  font-size: 18px !important;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sarabun);
-  font-size: 19px;
-  line-height: 1.65;
+  font-size: 20px !important;
+  line-height: 1.7;
 }
 
-/* Force bigger fonts in admin forms */
-.admin-content input,
-.admin-content textarea,
-.admin-content select {
-  font-size: 19px !important;
+/* ทุก input/label/textarea ทั่วทั้งเว็บ */
+input, textarea, select {
+  font-size: 1.05rem !important;
   padding: 14px 18px !important;
-  line-height: 1.6 !important;
 }
 
-.admin-content label {
-  font-size: 18px !important;
+label {
+  font-size: 1rem !important;
   font-weight: 600 !important;
 }
+
+/* Override ทุก Tailwind utility ด้วย attribute selector (specificity สูงกว่า class) */
+[class*="text-xs"]  { font-size: 14px !important; }
+[class*="text-sm"]  { font-size: 16px !important; }
+[class*="text-base"]{ font-size: 18px !important; }
+[class*="text-lg"]  { font-size: 20px !important; }
+[class*="text-xl"]  { font-size: 24px !important; }
+[class*="text-2xl"] { font-size: 28px !important; }
+[class*="text-3xl"] { font-size: 34px !important; }
+[class*="text-4xl"] { font-size: 40px !important; }
 
 /* Custom Utilities */
 .card-shadow {
