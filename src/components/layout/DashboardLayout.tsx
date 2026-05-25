@@ -18,11 +18,13 @@ import {
   Search
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
 interface NavItem {
   title: string;
   href: string;
   icon: React.ReactNode;
 }
+
 const navItems: NavItem[] = [
   { title: 'Dashboard', href: '/admin', icon: <LayoutDashboard size={22} /> },
   { title: 'ประวัติส่วนตัว', href: '/admin/profile', icon: <User size={22} /> },
@@ -32,17 +34,19 @@ const navItems: NavItem[] = [
   { title: 'ใบรับรอง / อบรม', href: '/admin/certs', icon: <Award size={22} /> },
   { title: 'ตั้งค่าระบบ', href: '/admin/settings', icon: <Settings size={22} /> },
 ];
+
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const router = useRouter();
+  const pathname = usePathname();
+
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' });
     router.push('/admin/login');
   };
-  const pathname = usePathname();
+
   return (
     <>
-      {/* Global font-size override for entire admin section */}
       <style jsx global>{`
         .admin-content { font-size: 19px; line-height: 1.7; }
         .admin-content h1 { font-size: 40px; line-height: 1.3; }
@@ -65,7 +69,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       `}</style>
 
       <div className="flex h-screen bg-[#f8fafc] text-[#1e293b] text-base">
-        {/* Sidebar */}
         <aside
           className={cn(
             'fixed inset-y-0 left-0 z-50 bg-white border-r border-slate-200 transition-all duration-300 ease-in-out',
@@ -73,7 +76,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           )}
         >
           <div className="flex flex-col h-full">
-            {/* Logo */}
             <div className="flex items-center h-20 px-6 border-b border-slate-100 mb-4">
               <div className="w-10 h-10 bg-primary-blue rounded-lg flex items-center justify-center text-white font-bold text-lg shrink-0">
                 P
@@ -82,7 +84,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 <span className="ml-3 font-bold text-2xl tracking-tight">IT Manager</span>
               )}
             </div>
-            {/* Navigation */}
+
             <nav className="flex-1 px-4 space-y-1.5">
               {navItems.map((item) => (
                 <Link
@@ -107,7 +109,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </Link>
               ))}
             </nav>
-            {/* Logout */}
+
             <div className="p-4 border-t border-slate-100">
               <button
                 onClick={handleLogout}
@@ -119,15 +121,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </div>
           </div>
         </aside>
-        {/* Main Content */}
+
         <main
           className={cn(
             'flex-1 flex flex-col transition-all duration-300 ease-in-out',
             isSidebarOpen ? 'ml-[290px]' : 'ml-20'
           )}
         >
-          {/* Top Header */}
-          <header className="h-20 glass-header sticky top-0 z-40 flex items-center justify-between px-8 bg-white/80 backdrop-blur border-b border-slate-100">
+          <header className="h-20 sticky top-0 z-40 flex items-center justify-between px-8 bg-white/80 backdrop-blur border-b border-slate-100">
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setSidebarOpen(!isSidebarOpen)}
@@ -148,4 +149,29 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <button className="relative p-2.5 hover:bg-slate-100 rounded-full text-slate-500 transition-colors">
                 <Bell size={22} />
                 <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
-     
+              </button>
+              <div className="h-8 w-px bg-slate-200 mx-2"></div>
+              <div className="flex items-center gap-3">
+                <div className="text-right hidden sm:block">
+                  <p className="text-base font-semibold text-slate-900 leading-none">Patiwat M.</p>
+                  <p className="text-sm text-slate-500 mt-1">Administrator</p>
+                </div>
+                <div className="w-11 h-11 rounded-full bg-slate-200 border-2 border-white overflow-hidden shadow-sm">
+                  <img
+                    src="/photos/profile.jpg"
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <div className="admin-content flex-1 p-10 overflow-y-auto">
+            {children}
+          </div>
+        </main>
+      </div>
+    </>
+  );
+}
