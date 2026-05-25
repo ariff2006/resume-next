@@ -1,71 +1,72 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap');
 
-/* ===== Bigger Tailwind text scale ===== */
 @theme {
-  --text-xs:   1rem;       /* 16px */
-  --text-sm:   1.125rem;   /* 18px */
-  --text-base: 1.25rem;    /* 20px */
-  --text-lg:   1.5rem;     /* 24px */
-  --text-xl:   1.75rem;    /* 28px */
-  --text-2xl:  2rem;       /* 32px */
-  --text-3xl:  2.5rem;     /* 40px */
-  --text-4xl:  3rem;       /* 48px */
-  --text-5xl:  3.5rem;     /* 56px */
+  --text-xs:   1rem;
+  --text-sm:   1.125rem;
+  --text-base: 1.25rem;
+  --text-lg:   1.5rem;
+  --text-xl:   1.75rem;
+  --text-2xl:  2rem;
+  --text-3xl:  2.5rem;
+  --text-4xl:  3rem;
+  --text-5xl:  3.5rem;
 }
 
 :root {
   --background: #f8fafc;
-  --foreground: #0f172a;        /* darker text - was #1e293b */
-  --primary-blue: #0066cc;       /* slightly darker for contrast */
+  --foreground: #0f172a;
+  --primary-blue: #0066cc;
   --sidebar-width: 320px;
 }
 
+/* DARKER + BOLDER everywhere */
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: #0f172a;
   font-family: 'Sarabun', 'Noto Sans Thai', system-ui, sans-serif;
   font-size: 18px;
+  font-weight: 500 !important;    /* heavier baseline */
   line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ===== Force darker, bolder text for admin readability ===== */
 input, textarea, select {
   font-family: 'Sarabun', 'Noto Sans Thai', system-ui, sans-serif;
   font-size: 18px !important;
   padding: 14px 18px !important;
-  color: #0f172a !important;           /* near-black */
-  font-weight: 500 !important;
-  border-color: #cbd5e1 !important;    /* darker border */
+  color: #0f172a !important;
+  font-weight: 600 !important;       /* bolder value text */
+  border-color: #94a3b8 !important;  /* visible border */
+  border-width: 2px !important;
 }
 
 input:focus, textarea:focus, select:focus {
   border-color: var(--primary-blue) !important;
-  box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.15) !important;
+  box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.2) !important;
 }
 
 label {
   font-family: 'Sarabun', 'Noto Sans Thai', system-ui, sans-serif;
   font-size: 16px !important;
   font-weight: 700 !important;
-  color: #1e293b !important;          /* darker label */
+  color: #0f172a !important;
 }
 
-/* Make slate-400 / slate-500 utilities darker */
-.text-slate-400 { color: #475569 !important; }   /* was too light */
-.text-slate-500 { color: #334155 !important; }
-.text-slate-600 { color: #1e293b !important; }
+/* Override all slate text utilities to be darker */
+.text-slate-300 { color: #64748b !important; }
+.text-slate-400 { color: #475569 !important; }
+.text-slate-500 { color: #1e293b !important; font-weight: 500; }
+.text-slate-600 { color: #0f172a !important; }
+.text-slate-700 { color: #020617 !important; }
 
-/* Make light borders visible */
-.border-slate-100 { border-color: #cbd5e1 !important; }
-.border-slate-200 { border-color: #94a3b8 !important; }
+h1, h2, h3, h4 { color: #020617 !important; font-weight: 800 !important; }
 
-/* Custom Utilities */
 .card-shadow {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.1);
 }
 .glass-header {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid #cbd5e1;
+  border-bottom: 2px solid #cbd5e1;
 }
