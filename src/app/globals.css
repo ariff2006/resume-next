@@ -20,24 +20,24 @@
   --sidebar-width: 320px;
 }
 
-/* DARKER + BOLDER everywhere */
 body {
   background: var(--background);
   color: #0f172a;
   font-family: 'Sarabun', 'Noto Sans Thai', system-ui, sans-serif;
   font-size: 18px;
-  font-weight: 500 !important;    /* heavier baseline */
+  font-weight: 500;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
 
+/* Form inputs — apply everywhere */
 input, textarea, select {
   font-family: 'Sarabun', 'Noto Sans Thai', system-ui, sans-serif;
   font-size: 18px !important;
   padding: 14px 18px !important;
   color: #0f172a !important;
-  font-weight: 600 !important;       /* bolder value text */
-  border-color: #94a3b8 !important;  /* visible border */
+  font-weight: 600 !important;
+  border-color: #94a3b8 !important;
   border-width: 2px !important;
 }
 
@@ -53,14 +53,16 @@ label {
   color: #0f172a !important;
 }
 
-/* Override all slate text utilities to be darker */
-.text-slate-300 { color: #64748b !important; }
-.text-slate-400 { color: #475569 !important; }
-.text-slate-500 { color: #1e293b !important; font-weight: 500; }
-.text-slate-600 { color: #0f172a !important; }
-.text-slate-700 { color: #020617 !important; }
-
-h1, h2, h3, h4 { color: #020617 !important; font-weight: 800 !important; }
+/* SCOPED: contrast/dark colors only inside admin (preserve Resume sidebar) */
+.admin-content .text-slate-300 { color: #64748b !important; }
+.admin-content .text-slate-400 { color: #475569 !important; }
+.admin-content .text-slate-500 { color: #1e293b !important; font-weight: 500; }
+.admin-content .text-slate-600 { color: #0f172a !important; }
+.admin-content .text-slate-700 { color: #020617 !important; }
+.admin-content h1, .admin-content h2, .admin-content h3, .admin-content h4 {
+  color: #020617 !important;
+  font-weight: 800 !important;
+}
 
 .card-shadow {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.1);
