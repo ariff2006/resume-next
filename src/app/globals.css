@@ -14,14 +14,14 @@
 }
 
 :root {
-  --background: #f8fafc;
+  --background: #eef2f6;       /* softer than #f8fafc — easier on eyes */
   --foreground: #0f172a;
   --primary-blue: #0066cc;
   --sidebar-width: 320px;
 }
 
 body {
-  background: var(--background);
+  background: var(--background) !important;
   color: #0f172a;
   font-family: 'Sarabun', 'Noto Sans Thai', system-ui, sans-serif;
   font-size: 18px;
@@ -30,7 +30,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Form inputs — apply everywhere */
+/* Override Tailwind bright bg colors with softer tones */
+.bg-slate-50  { background-color: #eef2f6 !important; }
+.bg-white     { background-color: #fbfcfd !important; }   /* slightly off-white instead of pure white */
+.bg-gray-50   { background-color: #eef2f6 !important; }
+
 input, textarea, select {
   font-family: 'Sarabun', 'Noto Sans Thai', system-ui, sans-serif;
   font-size: 18px !important;
@@ -39,6 +43,7 @@ input, textarea, select {
   font-weight: 600 !important;
   border-color: #94a3b8 !important;
   border-width: 2px !important;
+  background-color: #fbfcfd !important;
 }
 
 input:focus, textarea:focus, select:focus {
@@ -53,7 +58,7 @@ label {
   color: #0f172a !important;
 }
 
-/* SCOPED: contrast/dark colors only inside admin (preserve Resume sidebar) */
+/* SCOPED: admin contrast */
 .admin-content .text-slate-300 { color: #64748b !important; }
 .admin-content .text-slate-400 { color: #475569 !important; }
 .admin-content .text-slate-500 { color: #1e293b !important; font-weight: 500; }
@@ -65,10 +70,10 @@ label {
 }
 
 .card-shadow {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(15,23,42,0.06), 0 1px 3px rgba(15,23,42,0.08);
 }
 .glass-header {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(251, 252, 253, 0.95);
   backdrop-filter: blur(8px);
-  border-bottom: 2px solid #cbd5e1;
+  border-bottom: 1px solid #d1d9e0;
 }
